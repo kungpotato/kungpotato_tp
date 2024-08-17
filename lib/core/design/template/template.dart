@@ -15,7 +15,7 @@ class Template extends StatelessWidget {
     void incrementCounter() {}
 
     return Scaffold(
-      appBar: KPAppbar(
+      appBar: KPAppbar.gradient(
         title: KPText.head3('Template'),
       ),
       body: Padding(
