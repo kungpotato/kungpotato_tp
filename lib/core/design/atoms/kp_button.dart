@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
-import 'package:getwidget/size/gf_size.dart';
 import 'package:getwidget/types/gf_button_type.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
 
@@ -18,7 +17,6 @@ class KPButton extends GFButton {
           blockButton: fullWidth,
           shape: GFButtonShape.pills,
           type: GFButtonType.solid,
-          size: GFSize.SMALL,
         );
 
   factory KPButton.primary({

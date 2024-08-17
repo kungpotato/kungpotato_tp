@@ -115,6 +115,8 @@ class Template extends StatelessWidget {
                 KPText.error2('ทดสอบ error2'),
               ],
             ),
+            KPGap.largeH(),
+            KPText.subtitle('Input'),
           ],
         ),
       ),

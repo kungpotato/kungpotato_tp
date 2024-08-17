@@ -14,7 +14,6 @@ class KPOutlineButton extends GFButton {
           blockButton: fullWidth,
           shape: GFButtonShape.pills,
           type: GFButtonType.outline,
-          size: GFSize.SMALL,
         );
 
   factory KPOutlineButton.primary({
