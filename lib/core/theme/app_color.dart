@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 enum ColorSeed {
-  primary(Color(0xff677189)),
-  secondary(Color(0xffbd7418)),
+  primary(Color(0xff0d7c66)),
+  secondary(Color(0xff41b3a2)),
   tertiary(Color(0xff6c757d)),
   danger(Color(0xffdc3545)),
   success(Color(0xff28a745)),
