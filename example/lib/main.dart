@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kungpotato/core/design/template/template.dart';
-import 'package:kungpotato/core/theme/app_theme.dart';
+import 'package:kungpotato/kungpotato.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,5 +18,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
