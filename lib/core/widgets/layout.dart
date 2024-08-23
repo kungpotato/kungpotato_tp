@@ -7,7 +7,7 @@ import 'package:kungpotato/core/widgets/kp_tab.dart';
 class KpLayout extends StatefulWidget {
   const KpLayout({
     required this.tabs,
-    required this.appbar,
+    this.appbar,
     required this.views,
     this.onChanged,
     super.key,
@@ -15,7 +15,7 @@ class KpLayout extends StatefulWidget {
 
   final List<KpTab> tabs;
   final List<Widget> views;
-  final KPAppbar appbar;
+  final KPAppbar? appbar;
   final void Function(int index)? onChanged;
 
   @override

@@ -16,7 +16,7 @@ class Template extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KpLayout(
-      appbar: KPAppbar.gradient(
+      appbar: KPAppbar.gradientRound(
         title: KPText.head3('Template'),
       ),
       views: [
