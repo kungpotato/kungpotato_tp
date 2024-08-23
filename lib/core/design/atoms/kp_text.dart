@@ -6,7 +6,7 @@ class KPText extends Text {
     this.txt, {
     super.key,
     super.style = const TextStyle(fontSize: 14),
-  }) : super(txt ?? '');
+  }) : super(txt ?? '', maxLines: 2, overflow: TextOverflow.ellipsis);
 
   factory KPText.text(String text) {
     return KPText(
@@ -35,6 +35,13 @@ class KPText extends Text {
     return KPText(
       text,
       style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    );
+  }
+
+  factory KPText.head4(String? text) {
+    return KPText(
+      text,
+      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     );
   }
 
