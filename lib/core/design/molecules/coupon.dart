@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kungpotato/core/design/atoms/atoms.dart';
+import 'package:kungpotato/core/widgets/kp_image.dart';
 
 class KpCoupon extends StatelessWidget {
   const KpCoupon({
@@ -33,14 +35,14 @@ class KpCoupon extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.all(10),
+                padding: EdgeInsets.all(KPGapSize.mediumW.width),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Flexible(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: Image.asset(
+                        child: const BKImage.asset(
                           'assets/images/discount.jpg',
                           fit: BoxFit.cover,
                           width: 75,
@@ -48,28 +50,28 @@ class KpCoupon extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    KPGap(width: KPGapSize.mediumW.width),
                     Flexible(
                       flex: 4,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Flexible(
-                            child: Text(
+                            child: KPText(
                               title ?? 'จ่ายน้อยลง คุ้มค่ามากขึ้น',
                               style: theme.textTheme.titleMedium
                                   ?.copyWith(color: Colors.black),
                             ),
                           ),
                           Flexible(
-                            child: Text(
+                            child: KPText(
                               subTitle ??
                                   'ระบบจะมอบส่วนลดให้อัตโนมัติ รับส่วนลดได้เลย!!!',
                               style: theme.textTheme.bodySmall,
                             ),
                           ),
                           Flexible(
-                            child: Text(
+                            child: KPText(
                               price ?? '200฿',
                               style: theme.textTheme.titleSmall?.copyWith(
                                 color: theme.primaryColor,
