@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kungpotato/core/design/atoms/atoms.dart';
 
 enum KpProductCardType { modern, modern2 }
 
@@ -58,7 +59,7 @@ class _KpProductCardState extends State<KpProductCard> {
               children: [
                 // Product Image with Gradient Overlay
                 Flexible(
-                  flex: 6,
+                  flex: 4,
                   child: Stack(
                     children: [
                       ClipRRect(
@@ -94,61 +95,78 @@ class _KpProductCardState extends State<KpProductCard> {
                   ),
                 ),
                 Flexible(
-                  flex: 4,
+                  flex: 3,
                   child: Padding(
                     padding: const EdgeInsets.all(12),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         // Product Title
                         Text(
                           widget.title,
                           style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                           ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
                         // Product Price and Old Price
-                        Row(
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text(
-                              '\$${widget.price.toStringAsFixed(2)}',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Colors.green[700],
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            if (widget.oldPrice != null &&
-                                widget.oldPrice! > widget.price)
-                              Text(
-                                '\$${widget.oldPrice!.toStringAsFixed(2)}',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.red[700],
-                                  decoration: TextDecoration.lineThrough,
+                            Row(
+                              children: [
+                                Text(
+                                  '\$${widget.price.toStringAsFixed(2)}',
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.green[700],
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                          ],
-                        ),
-                        // Product Rating
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.star,
-                              size: 16,
-                              color: Colors.yellow[700],
+                                const SizedBox(width: 10),
+                                if (widget.oldPrice != null &&
+                                    widget.oldPrice! > widget.price)
+                                  Text(
+                                    '\$${widget.oldPrice!.toStringAsFixed(2)}',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Colors.red[700],
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
+                                  ),
+                              ],
                             ),
-                            const SizedBox(width: 4),
-                            Text(
-                              widget.rating.toString(),
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.star,
+                                      size: 12,
+                                      color: Colors.yellow[700],
+                                    ),
+                                    const SizedBox(width: 4),
+                                    Text(
+                                      widget.rating.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                KPText(
+                                  'ขายแล้ว 20 ชิ้น',
+                                  style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey.shade700,
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -162,28 +180,30 @@ class _KpProductCardState extends State<KpProductCard> {
 
             if (widget.oldPrice != null && widget.oldPrice! > widget.price)
               Positioned(
-                top: 10,
-                left: 10,
+                top: 0,
+                left: 0,
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                   decoration: BoxDecoration(
-                    color: Colors.red[700],
-                    borderRadius: BorderRadius.circular(20),
+                    color: Colors.red.shade700,
+                    borderRadius:
+                        const BorderRadius.only(topLeft: Radius.circular(20)),
                   ),
-                  child: Text(
+                  child: KPText(
                     '-${((1 - widget.price / widget.oldPrice!) * 100).toStringAsFixed(0)}%',
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+                      fontSize: 14,
                     ),
                   ),
                 ),
               ),
             // Favorite Icon
             Positioned(
-              top: 5,
-              right: 5,
+              top: 0,
+              right: 0,
               child: IconButton(
                 icon: Icon(
                   favorite ? Icons.favorite : Icons.favorite_border,

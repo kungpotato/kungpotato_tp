@@ -42,7 +42,7 @@ class KpCoupon extends StatelessWidget {
                     Flexible(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: const BKImage.asset(
+                        child: const KpImage.asset(
                           'assets/images/discount.jpg',
                           fit: BoxFit.cover,
                           width: 75,

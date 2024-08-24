@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class BKImage extends StatelessWidget {
-  const BKImage.base64(
+class KpImage extends StatelessWidget {
+  const KpImage.base64(
     this.source, {
     this.fit,
     this.width,
@@ -13,7 +13,7 @@ class BKImage extends StatelessWidget {
     super.key,
   }) : imageType = ImageType.base64;
 
-  const BKImage.asset(
+  const KpImage.asset(
     this.source, {
     this.fit,
     this.width,
@@ -21,7 +21,7 @@ class BKImage extends StatelessWidget {
     super.key,
   }) : imageType = ImageType.asset;
 
-  const BKImage.network(
+  const KpImage.network(
     this.source, {
     this.fit,
     this.width,
@@ -29,7 +29,7 @@ class BKImage extends StatelessWidget {
     super.key,
   }) : imageType = ImageType.network;
 
-  const BKImage.svg(
+  const KpImage.svg(
     this.source, {
     this.fit,
     this.width,
@@ -52,7 +52,7 @@ class BKImage extends StatelessWidget {
           width: width,
           height: height,
           errorBuilder: (context, error, stackTrace) =>
-              const BKImage.base64('base64Mock'),
+              const KpImage.base64('base64Mock'),
         );
       case ImageType.network:
         return Image.network(
@@ -61,7 +61,7 @@ class BKImage extends StatelessWidget {
           width: width,
           height: height,
           errorBuilder: (context, error, stackTrace) =>
-              const BKImage.base64(base64Mock),
+              const KpImage.base64(base64Mock),
           loadingBuilder: (context, child, loadingProgress) =>
               const CircularProgressIndicator.adaptive(),
         );

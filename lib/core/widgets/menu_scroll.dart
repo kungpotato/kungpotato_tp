@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kungpotato/kungpotato.dart';
 
 class KpMenuScroll extends StatelessWidget {
   const KpMenuScroll({required this.options, super.key, this.isTwoLine = true});
@@ -49,9 +50,9 @@ class MenuScrollItem extends StatelessWidget {
               ),
             ),
           if (imageUr == null)
-            Flexible(
+            const Flexible(
               flex: 3,
-              child: Image.asset(
+              child: KpImage.asset(
                 'assets/images/diet.png',
                 width: 45,
               ),

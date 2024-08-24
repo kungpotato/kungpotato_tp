@@ -20,7 +20,7 @@ class _KpProductListState extends State<KpProductList> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 14,
-        childAspectRatio: 4 / 6,
+        childAspectRatio: 6 / 9,
         mainAxisSpacing: 14,
       ),
       children: widget.children,
