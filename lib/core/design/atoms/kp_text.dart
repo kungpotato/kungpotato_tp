@@ -62,14 +62,14 @@ class KPText extends Text {
   factory KPText.error1(String? text) {
     return KPText(
       text,
-      style: TextStyle(fontSize: 12, color: ColorSeed.danger.color),
+      style: TextStyle(fontSize: 12, color: KpColorSeed.instance.danger),
     );
   }
 
   factory KPText.error2(String? text) {
     return KPText(
       text,
-      style: TextStyle(fontSize: 10, color: ColorSeed.danger.color),
+      style: TextStyle(fontSize: 10, color: KpColorSeed.instance.danger),
     );
   }
 

@@ -23,7 +23,7 @@ class KPOutlineButton extends GFButton {
     bool? fullWidth,
   }) {
     return KPOutlineButton(
-      color: ColorSeed.primary.color,
+      color: KpColorSeed.instance.primary,
       onPressed: onPressed,
       text: text,
       fullWidth: fullWidth,
@@ -38,7 +38,7 @@ class KPOutlineButton extends GFButton {
     bool? fullWidth,
   }) {
     return KPOutlineButton(
-      color: ColorSeed.secondary.color,
+      color: KpColorSeed.instance.secondary,
       onPressed: onPressed,
       text: text,
       fullWidth: fullWidth,
@@ -53,7 +53,7 @@ class KPOutlineButton extends GFButton {
     bool? fullWidth,
   }) {
     return KPOutlineButton(
-      color: ColorSeed.tertiary.color,
+      color: KpColorSeed.instance.tertiary,
       onPressed: onPressed,
       text: text,
       fullWidth: fullWidth,
@@ -68,7 +68,7 @@ class KPOutlineButton extends GFButton {
     bool? fullWidth,
   }) {
     return KPOutlineButton(
-      color: ColorSeed.danger.color,
+      color: KpColorSeed.instance.danger,
       onPressed: onPressed,
       text: text,
       fullWidth: fullWidth,
@@ -83,7 +83,7 @@ class KPOutlineButton extends GFButton {
     bool? fullWidth,
   }) {
     return KPOutlineButton(
-      color: ColorSeed.success.color,
+      color: KpColorSeed.instance.success,
       onPressed: onPressed,
       text: text,
       fullWidth: fullWidth,
@@ -98,7 +98,7 @@ class KPOutlineButton extends GFButton {
     bool? fullWidth,
   }) {
     return KPOutlineButton(
-      color: ColorSeed.warning.color,
+      color: KpColorSeed.instance.warning,
       onPressed: onPressed,
       text: text,
       fullWidth: fullWidth,
@@ -113,7 +113,7 @@ class KPOutlineButton extends GFButton {
     bool? fullWidth,
   }) {
     return KPOutlineButton(
-      color: ColorSeed.info.color,
+      color: KpColorSeed.instance.info,
       onPressed: onPressed,
       text: text,
       fullWidth: fullWidth,

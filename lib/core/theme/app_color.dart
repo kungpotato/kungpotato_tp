@@ -1,17 +1,34 @@
 import 'package:flutter/material.dart';
 
-enum ColorSeed {
-  primary(Color(0xff0d7c66)),
-  secondary(Color(0xff41b3a2)),
-  tertiary(Color(0xff6c757d)),
-  danger(Color(0xffdc3545)),
-  success(Color(0xff28a745)),
-  warning(Color(0xffffc107)),
-  info(Color(0xff17a2b8)),
-  front(Color(0xff2c3333)),
-  background(Color(0xfff5f5f5));
+class KpColorSeed {
+  KpColorSeed._();
 
-  const ColorSeed(this.color);
+  static final KpColorSeed _instance = KpColorSeed._();
 
-  final Color color;
+  static KpColorSeed get instance => _instance;
+
+  Color? _primary;
+  Color? _secondary;
+
+  Color get primary => _primary ?? const Color(0xff0d7c66);
+
+  set primary(Color val) => _primary = val;
+
+  Color get secondary => _secondary ?? const Color(0xff41b3a2);
+
+  set secondary(Color val) => _secondary = val;
+
+  Color get tertiary => const Color(0xff6c757d);
+
+  Color get danger => const Color(0xffdc3545);
+
+  Color get success => const Color(0xff28a745);
+
+  Color get warning => const Color(0xffffc107);
+
+  Color get info => const Color(0xff17a2b8);
+
+  Color get front => const Color(0xff2c3333);
+
+  Color get background => const Color(0xfff5f5f5);
 }

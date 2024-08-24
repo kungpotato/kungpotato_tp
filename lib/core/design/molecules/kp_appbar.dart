@@ -40,7 +40,7 @@ class KPAppbar extends CustomClippedAppBar {
       leading: leading,
       actions: actions,
       gradient: LinearGradient(
-        colors: [ColorSeed.primary.color, ColorSeed.secondary.color],
+        colors: [KpColorSeed.instance.primary, KpColorSeed.instance.secondary],
       ),
       height: Platform.isIOS ? 44 : 56,
     );
@@ -57,7 +57,7 @@ class KPAppbar extends CustomClippedAppBar {
       actions: actions,
       clipper: ClipBottomCorners(),
       gradient: LinearGradient(
-        colors: [ColorSeed.primary.color, ColorSeed.secondary.color],
+        colors: [KpColorSeed.instance.primary, KpColorSeed.instance.secondary],
       ),
       height: Platform.isIOS ? 44 : 56,
     );

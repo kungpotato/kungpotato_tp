@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kungpotato/kungpotato.dart';
 
 void main() {
+  KpColorSeed.instance.primary = const Color(0xff4ebe65);
+  KpColorSeed.instance.secondary = const Color(0xffe073ca);
+
   runApp(const MyApp());
 }
 

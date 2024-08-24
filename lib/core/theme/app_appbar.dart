@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
 
-
 class AppAppbar {
   static final appbar = AppBarTheme(
-    backgroundColor: ColorSeed.primary.color,
+    backgroundColor: KpColorSeed.instance.primary,
     elevation: 0,
-    shadowColor: ColorSeed.primary.color,
+    shadowColor: KpColorSeed.instance.primary,
     centerTitle: true,
     iconTheme: const IconThemeData(
       color: Colors.white,

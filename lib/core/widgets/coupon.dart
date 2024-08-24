@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class KpCoupon extends StatelessWidget {
-  const KpCoupon(
-      {super.key,
-      this.title,
-      this.subTitle,
-      this.price,
-      this.icon,
-      this.onTap});
+  const KpCoupon({
+    super.key,
+    this.title,
+    this.subTitle,
+    this.price,
+    this.icon,
+    this.onTap,
+  });
 
   final String? title;
   final String? subTitle;
