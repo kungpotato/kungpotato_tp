@@ -55,7 +55,9 @@ class _KpLayoutState extends State<KpLayout>
         children: widget.views.take(widget.tabs.length).toList(),
       ),
       bottomNavigationBar: GFTabBar(
-        tabBarColor: ColorSeed.primary.color,
+        tabBarColor: ColorSeed.background.color,
+        labelColor: ColorSeed.primary.color,
+        unselectedLabelColor: Colors.grey,
         length: widget.tabs.length,
         controller: tabController,
         tabs: widget.tabs,

@@ -9,7 +9,7 @@ enum ColorSeed {
   warning(Color(0xffffc107)),
   info(Color(0xff17a2b8)),
   front(Color(0xff2c3333)),
-  background(Color(0xffe2e2e2));
+  background(Color(0xfff5f5f5));
 
   const ColorSeed(this.color);
 
