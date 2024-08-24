@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 enum KpProductCardType { modern, modern2 }
 
-class KpProductCard extends StatelessWidget {
+class KpProductCard extends StatefulWidget {
   const KpProductCard({
     required this.imageUrl,
     required this.title,
     required this.price,
-    required this.onTap,
+    this.onTap,
+    this.onFavoriteTap,
     this.rating,
     this.type,
     this.oldPrice,
@@ -22,12 +23,28 @@ class KpProductCard extends StatelessWidget {
   final KpProductCardType? type;
   final double? oldPrice;
   final bool isFavorite;
-  final void Function() onTap;
+  final void Function()? onTap;
+  final void Function()? onFavoriteTap;
+
+  @override
+  State<KpProductCard> createState() => _KpProductCardState();
+}
+
+class _KpProductCardState extends State<KpProductCard> {
+  bool favorite = false;
+
+  @override
+  void initState() {
+    setState(() {
+      favorite = widget.isFavorite;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: widget.onTap,
       behavior: HitTestBehavior.translucent,
       child: Card(
         shape: RoundedRectangleBorder(
@@ -50,7 +67,7 @@ class KpProductCard extends StatelessWidget {
                           topRight: Radius.circular(20),
                         ),
                         child: Image.network(
-                          imageUrl,
+                          widget.imageUrl,
                           height: 180,
                           width: double.infinity,
                           fit: BoxFit.cover,
@@ -85,7 +102,7 @@ class KpProductCard extends StatelessWidget {
                       children: [
                         // Product Title
                         Text(
-                          title,
+                          widget.title,
                           style: const TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -97,7 +114,7 @@ class KpProductCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              '\$${price.toStringAsFixed(2)}',
+                              '\$${widget.price.toStringAsFixed(2)}',
                               style: TextStyle(
                                 fontSize: 18,
                                 color: Colors.green[700],
@@ -105,9 +122,10 @@ class KpProductCard extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(width: 10),
-                            if (oldPrice != null && oldPrice! > price)
+                            if (widget.oldPrice != null &&
+                                widget.oldPrice! > widget.price)
                               Text(
-                                '\$${oldPrice!.toStringAsFixed(2)}',
+                                '\$${widget.oldPrice!.toStringAsFixed(2)}',
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.red[700],
@@ -126,7 +144,7 @@ class KpProductCard extends StatelessWidget {
                             ),
                             const SizedBox(width: 4),
                             Text(
-                              rating.toString(),
+                              widget.rating.toString(),
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -142,7 +160,7 @@ class KpProductCard extends StatelessWidget {
             ),
             // Discount Badge
 
-            if (oldPrice != null && oldPrice! > price)
+            if (widget.oldPrice != null && widget.oldPrice! > widget.price)
               Positioned(
                 top: 10,
                 left: 10,
@@ -154,7 +172,7 @@ class KpProductCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    '-${((1 - price / oldPrice!) * 100).toStringAsFixed(0)}%',
+                    '-${((1 - widget.price / widget.oldPrice!) * 100).toStringAsFixed(0)}%',
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -168,11 +186,15 @@ class KpProductCard extends StatelessWidget {
               right: 5,
               child: IconButton(
                 icon: Icon(
-                  isFavorite ? Icons.favorite : Icons.favorite_border,
+                  favorite ? Icons.favorite : Icons.favorite_border,
                   size: 25,
+                  color: Colors.white,
                 ),
                 onPressed: () {
-                  // Handle favorite toggle
+                  setState(() {
+                    favorite = !favorite;
+                  });
+                  widget.onFavoriteTap?.call();
                 },
               ),
             ),

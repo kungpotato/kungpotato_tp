@@ -156,14 +156,13 @@ class _TabOne extends StatelessWidget {
             KpProductList(
               children: List.generate(
                 6,
-                (index) => KpProductCard(
+                (index) => const KpProductCard(
                   title: 'ผักชี',
                   imageUrl:
                       'https://s359.kapook.com//pagebuilder/c66d622b-7652-4c23-8272-1d1083fa3ef0.jpg',
                   price: 30,
                   rating: 2,
                   oldPrice: 50,
-                  onTap: () {},
                 ),
               ),
             ),
