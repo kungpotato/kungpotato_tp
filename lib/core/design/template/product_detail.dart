@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kungpotato/core/design/molecules/kp_appbar.dart';
 import 'package:kungpotato/core/widgets/image_slide.dart';
 
-class Product {
-  Product({
+class KpProduct {
+  KpProduct({
     required this.name,
     required this.description,
     required this.price,
@@ -20,23 +20,23 @@ class Product {
   final int reviewsCount;
 }
 
-class ProductDetailPage extends StatefulWidget {
-  const ProductDetailPage({
+class KpProductDetailPage extends StatefulWidget {
+  const KpProductDetailPage({
     required this.product,
     this.isFavorite = false,
     this.onFavoriteTap,
     super.key,
   });
 
-  final Product product;
+  final KpProduct product;
   final bool isFavorite;
   final void Function()? onFavoriteTap;
 
   @override
-  State<ProductDetailPage> createState() => _ProductDetailPageState();
+  State<KpProductDetailPage> createState() => _KpProductDetailPageState();
 }
 
-class _ProductDetailPageState extends State<ProductDetailPage> {
+class _KpProductDetailPageState extends State<KpProductDetailPage> {
   bool favorite = false;
 
   @override

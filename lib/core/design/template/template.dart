@@ -195,8 +195,8 @@ class _TabOne extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ProductDetailPage(
-                          product: Product(
+                        builder: (context) => KpProductDetailPage(
+                          product: KpProduct(
                             name: 'xxxxxx',
                             description: 'yyyyyyy',
                             price: 300,
