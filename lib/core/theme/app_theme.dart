@@ -12,6 +12,7 @@ final inputDecoration = InputDecorationTheme(
   focusColor: KpColorSeed.instance.primary,
   filled: true,
   isDense: true,
+  contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
   labelStyle: const TextStyle(color: Colors.black87, fontSize: 14),
   hintStyle: const TextStyle(color: Colors.black87, fontSize: 14),
   fillColor: KpColorSeed.instance.background,
