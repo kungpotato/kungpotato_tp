@@ -8,6 +8,7 @@ import 'package:kungpotato/core/design/molecules/coupon.dart';
 import 'package:kungpotato/core/design/molecules/kp_appbar.dart';
 import 'package:kungpotato/core/design/molecules/product_card.dart';
 import 'package:kungpotato/core/design/molecules/product_list.dart';
+import 'package:kungpotato/core/design/template/product_detail.dart';
 import 'package:kungpotato/core/widgets/image_slide.dart';
 import 'package:kungpotato/core/widgets/kp_tab.dart';
 import 'package:kungpotato/core/widgets/layout.dart';
@@ -183,13 +184,37 @@ class _TabOne extends StatelessWidget {
             child: KpProductList(
               children: List.generate(
                 6,
-                (index) => const KpProductCard(
+                (index) => KpProductCard(
                   title: 'ผักชี',
                   imageUrl:
                       'https://s359.kapook.com//pagebuilder/c66d622b-7652-4c23-8272-1d1083fa3ef0.jpg',
                   price: 30,
                   rating: 2,
                   oldPrice: 50,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductDetailPage(
+                          product: Product(
+                            name: 'xxxxxx',
+                            description: 'yyyyyyy',
+                            price: 300,
+                            images: List.generate(
+                              3,
+                              (index) => Image.asset(
+                                'assets/images/banner.png',
+                                width: double.maxFinite,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            rating: 3,
+                            reviewsCount: 4,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),

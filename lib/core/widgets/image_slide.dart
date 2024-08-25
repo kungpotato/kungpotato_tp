@@ -2,7 +2,9 @@ import 'package:banner_carousel/banner_carousel.dart';
 import 'package:flutter/material.dart';
 
 class KPImageSlide extends StatelessWidget {
-  const KPImageSlide({super.key});
+  const KPImageSlide({this.images, super.key});
+
+  final List<Widget>? images;
 
   List<Widget> listBanners() => List.generate(
         3,
@@ -18,7 +20,7 @@ class KPImageSlide extends StatelessWidget {
     final theme = Theme.of(context);
 
     return BannerCarousel(
-      customizedBanners: listBanners(),
+      customizedBanners: images ?? listBanners(),
       height: 200,
       margin: EdgeInsets.zero,
       activeColor: theme.primaryColor,
