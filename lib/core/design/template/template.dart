@@ -27,9 +27,7 @@ class Template extends StatelessWidget {
       ),
       views: [
         _TabOne(),
-        Center(
-          child: KPText.head3('2'),
-        ),
+        ScrollShrinkWidget(),
         Center(
           child: KPText.head3('3'),
         ),
@@ -221,6 +219,90 @@ class _TabOne extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class ScrollShrinkWidget extends StatefulWidget {
+  @override
+  _ScrollShrinkWidgetState createState() => _ScrollShrinkWidgetState();
+}
+
+class _ScrollShrinkWidgetState extends State<ScrollShrinkWidget> {
+  final ScrollController _scrollController = ScrollController();
+  double _height = 230;
+  final double _minHeight = 50;
+  final double _maxHeight = 230;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    setState(() {
+      _height = 300.0 - _scrollController.offset;
+      if (_height < _minHeight) {
+        _height = _minHeight;
+      } else if (_height > _maxHeight) {
+        _height = _maxHeight;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          height: _height,
+          color: Colors.blue,
+          child: const SizedBox(
+            width: double.maxFinite,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: SizedBox(
+                    width: 300,
+                    height: 200,
+                    child: Card(
+                      child: Center(
+                        child: Text('test'),
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: SizedBox(width: 300, child: TextField()),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Expanded(
+          child: ListView.builder(
+            controller: _scrollController,
+            itemCount: 50,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text('Item $index'),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }
