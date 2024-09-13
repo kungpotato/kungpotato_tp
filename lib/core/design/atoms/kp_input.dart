@@ -20,29 +20,34 @@ class KpInputField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         KPText.label(label),
-        Container(
-          decoration: BoxDecoration(
-            border: Border(
-              left: BorderSide(
-                color: theme.primaryColor, // Customize the border color
-                width: 3, // Customize the border width
+        Row(
+          children: [
+            Container(
+              height: double.maxFinite,
+              decoration: BoxDecoration(
+                border: Border(
+                  left: BorderSide(
+                    color: theme.primaryColor, // Customize the border color
+                    width: 3, // Customize the border width
+                  ),
+                ),
               ),
             ),
-          ),
-          child: ReactiveTextField(
-            formControl: formControl,
-            validationMessages: validationMessages,
-            decoration: const InputDecoration(
-              border: InputBorder.none,
-              // Removes default border
-              contentPadding: EdgeInsets.symmetric(
-                vertical: 10, // Vertical padding (top and bottom)
-                horizontal: 8, // Horizontal padding (left and right)
+            ReactiveTextField(
+              formControl: formControl,
+              validationMessages: validationMessages,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                // Removes default border
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 10, // Vertical padding (top and bottom)
+                  horizontal: 8, // Horizontal padding (left and right)
+                ),
+                filled: true,
+                fillColor: Colors.white,
               ),
-              filled: true,
-              fillColor: Colors.white,
-            ),
-          ),
+            )
+          ],
         ),
       ],
     );
