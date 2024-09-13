@@ -33,7 +33,8 @@ class KpInputField extends StatelessWidget {
             formControl: formControl,
             validationMessages: validationMessages,
             decoration: const InputDecoration(
-              border: InputBorder.none, // Removes default border
+              border: InputBorder.none,
+              // Removes default border
               contentPadding: EdgeInsets.symmetric(
                 vertical: 10, // Vertical padding (top and bottom)
                 horizontal: 8, // Horizontal padding (left and right)

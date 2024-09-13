@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:kungpotato/core/design/atoms/kp_button.dart';
 import 'package:kungpotato/core/design/atoms/kp_gap.dart';
-import 'package:kungpotato/core/design/atoms/kp_input.dart';
 import 'package:kungpotato/core/design/atoms/kp_outline_button.dart';
 import 'package:kungpotato/core/design/atoms/kp_text.dart';
 import 'package:kungpotato/core/design/molecules/coupon.dart';
@@ -130,23 +129,6 @@ class _TabOne extends StatelessWidget {
               KPOutlineButton.info(
                 text: 'Info',
                 onPressed: incrementCounter,
-              ),
-            ],
-          ),
-          KPGap.largeH(),
-          KPText.subtitle('Input'),
-          Row(
-            children: [
-              const Expanded(
-                child: KpInputField(
-                  label: 'ชื่อ',
-                ),
-              ),
-              KPGap.mediumW(),
-              const Expanded(
-                child: KpInputField(
-                  label: 'นามสกุล',
-                ),
               ),
             ],
           ),
