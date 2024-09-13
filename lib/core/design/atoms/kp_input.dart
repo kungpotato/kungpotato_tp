@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kungpotato/core/design/atoms/atoms.dart';
+import 'package:kungpotato/kungpotato.dart';
 
 class KpInputField extends StatelessWidget {
   const KpInputField({
     required this.label,
-    this.controller,
+    this.formControl,
     super.key,
   });
 
   final String label;
-  final TextEditingController? controller;
+  final FormControl<dynamic>? formControl;
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class KpInputField extends StatelessWidget {
               ),
             ),
           ),
-          child: TextField(
-            controller: controller,
+          child: ReactiveTextField(
+            formControl: formControl,
             decoration: const InputDecoration(
               border: InputBorder.none, // Removes default border
               contentPadding: EdgeInsets.symmetric(

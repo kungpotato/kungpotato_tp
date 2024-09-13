@@ -20,6 +20,7 @@ dependencies:
   reactive_forms: ^17.0.1
   flick_video_player: ^0.9.0
   video_player: ^2.9.1
+  reactive_forms_generator: ^5.0.5
 
 dev_dependencies:
   flutter_test:
