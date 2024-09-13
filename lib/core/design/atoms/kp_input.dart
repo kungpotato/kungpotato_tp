@@ -24,7 +24,7 @@ class KpInputField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 45,
+              height: 43,
               decoration: BoxDecoration(
                 border: Border(
                   left: BorderSide(
