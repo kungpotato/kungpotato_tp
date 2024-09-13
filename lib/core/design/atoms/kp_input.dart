@@ -23,7 +23,7 @@ class KpInputField extends StatelessWidget {
         Row(
           children: [
             Container(
-              height: 10,
+              height: 40,
               decoration: BoxDecoration(
                 border: Border(
                   left: BorderSide(
