@@ -33,18 +33,20 @@ class KpInputField extends StatelessWidget {
                 ),
               ),
             ),
-            ReactiveTextField(
-              formControl: formControl,
-              validationMessages: validationMessages,
-              decoration: const InputDecoration(
-                border: InputBorder.none,
-                // Removes default border
-                contentPadding: EdgeInsets.symmetric(
-                  vertical: 10, // Vertical padding (top and bottom)
-                  horizontal: 8, // Horizontal padding (left and right)
+            Expanded(
+              child: ReactiveTextField(
+                formControl: formControl,
+                validationMessages: validationMessages,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  // Removes default border
+                  contentPadding: EdgeInsets.symmetric(
+                    vertical: 10, // Vertical padding (top and bottom)
+                    horizontal: 8, // Horizontal padding (left and right)
+                  ),
+                  filled: true,
+                  fillColor: Colors.white,
                 ),
-                filled: true,
-                fillColor: Colors.white,
               ),
             )
           ],
