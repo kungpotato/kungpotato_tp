@@ -17,6 +17,13 @@ class KPText extends Text {
     );
   }
 
+  factory KPText.label(String text) {
+    return KPText(
+      text,
+      style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
+    );
+  }
+
   factory KPText.head1(String? text) {
     return KPText(
       text,

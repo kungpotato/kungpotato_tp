@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:kungpotato/core/design/atoms/kp_button.dart';
 import 'package:kungpotato/core/design/atoms/kp_gap.dart';
+import 'package:kungpotato/core/design/atoms/kp_input.dart';
 import 'package:kungpotato/core/design/atoms/kp_outline_button.dart';
 import 'package:kungpotato/core/design/atoms/kp_text.dart';
 import 'package:kungpotato/core/design/molecules/coupon.dart';
@@ -27,10 +28,8 @@ class Template extends StatelessWidget {
       ),
       views: [
         _TabOne(),
-        ScrollShrinkWidget(),
-        Center(
-          child: KPText.head3('3'),
-        ),
+        const ScrollShrinkWidget(),
+        const SettingPage(),
       ],
       tabs: const [
         KpTab(
@@ -135,6 +134,23 @@ class _TabOne extends StatelessWidget {
             ],
           ),
           KPGap.largeH(),
+          KPText.subtitle('Input'),
+          Row(
+            children: [
+              const Expanded(
+                child: KpInputField(
+                  label: 'ชื่อ',
+                ),
+              ),
+              KPGap.mediumW(),
+              const Expanded(
+                child: KpInputField(
+                  label: 'นามสกุล',
+                ),
+              ),
+            ],
+          ),
+          KPGap.largeH(),
           KPText.subtitle('ตัวหนังสือ'),
           Wrap(
             spacing: 24,
@@ -224,11 +240,13 @@ class _TabOne extends StatelessWidget {
 }
 
 class ScrollShrinkWidget extends StatefulWidget {
+  const ScrollShrinkWidget({super.key});
+
   @override
-  _ScrollShrinkWidgetState createState() => _ScrollShrinkWidgetState();
+  ScrollShrinkWidgetState createState() => ScrollShrinkWidgetState();
 }
 
-class _ScrollShrinkWidgetState extends State<ScrollShrinkWidget> {
+class ScrollShrinkWidgetState extends State<ScrollShrinkWidget> {
   final ScrollController _scrollController = ScrollController();
   double _height = 230;
   final double _minHeight = 50;
@@ -303,6 +321,21 @@ class _ScrollShrinkWidgetState extends State<ScrollShrinkWidget> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class SettingPage extends StatelessWidget {
+  const SettingPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: KPGapSize.mediumW.width,
+        right: KPGapSize.mediumW.width,
+      ),
+      child: const SizedBox(),
     );
   }
 }

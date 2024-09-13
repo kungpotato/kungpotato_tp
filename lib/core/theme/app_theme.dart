@@ -5,32 +5,27 @@ import 'package:kungpotato/core/theme/app_color.dart';
 import 'package:kungpotato/helpers/utils.dart';
 
 final inputDecoration = InputDecorationTheme(
-  border: const OutlineInputBorder(
+  border: const UnderlineInputBorder(
     borderSide: BorderSide(color: Colors.grey),
-    borderRadius: BorderRadius.all(Radius.circular(20)),
   ),
   focusColor: KpColorSeed.instance.primary,
   filled: true,
   isDense: true,
-  contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+  // contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
   labelStyle: const TextStyle(color: Colors.black87, fontSize: 14),
   hintStyle: const TextStyle(color: Colors.black87, fontSize: 14),
   fillColor: KpColorSeed.instance.background,
-  focusedBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    borderSide: const BorderSide(color: Colors.grey),
+  focusedBorder: const UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.grey),
   ),
-  enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    borderSide: const BorderSide(color: Colors.grey),
+  enabledBorder: const UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.grey),
   ),
-  errorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    borderSide: const BorderSide(color: Colors.red),
+  errorBorder: const UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.red),
   ),
-  focusedErrorBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20),
-    borderSide: const BorderSide(color: Colors.red),
+  focusedErrorBorder: const UnderlineInputBorder(
+    borderSide: BorderSide(color: Colors.red),
   ),
   outlineBorder: const BorderSide(color: Colors.grey),
   prefixStyle: TextStyle(color: KpColorSeed.instance.primary),
