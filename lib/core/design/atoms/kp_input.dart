@@ -5,11 +5,13 @@ class KpInputField extends StatelessWidget {
   const KpInputField({
     required this.label,
     this.formControl,
+    this.validationMessages,
     super.key,
   });
 
   final String label;
   final FormControl<dynamic>? formControl;
+  final Map<String, String Function(Object)>? validationMessages;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class KpInputField extends StatelessWidget {
           ),
           child: ReactiveTextField(
             formControl: formControl,
+            validationMessages: validationMessages,
             decoration: const InputDecoration(
               border: InputBorder.none, // Removes default border
               contentPadding: EdgeInsets.symmetric(
