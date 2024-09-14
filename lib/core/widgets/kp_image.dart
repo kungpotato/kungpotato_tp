@@ -66,8 +66,12 @@ class KpImage extends StatelessWidget {
           height: height,
           errorBuilder: (context, error, stackTrace) =>
               const KpImage.base64(base64Mock),
-          loadingBuilder: (context, child, loadingProgress) =>
-              const CircularProgressIndicator.adaptive(),
+          loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            }
+            return const CircularProgressIndicator.adaptive();
+          },
         );
       case ImageType.svg:
         return SvgPicture.asset(
