@@ -163,12 +163,8 @@ class _TabOne extends StatelessWidget {
               right: KPGapSize.extraLargeXlW.width,
               left: KPGapSize.extraLargeXlW.width,
             ),
-            child: KpMenuScroll(
-              isTwoLine: false,
-              options: List.generate(
-                10,
-                (index) => const MenuScrollItem(),
-              ),
+            child: const KpMenuScroll(
+              menuList: [],
             ),
           ),
           KPGap.largeH(),
