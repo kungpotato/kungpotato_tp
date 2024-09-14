@@ -44,6 +44,10 @@ class KpImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (source.contains('.png') || source.contains('.jpg')) {
+      precacheImage(NetworkImage(source), context);
+    }
+
     switch (imageType) {
       case ImageType.asset:
         return Image.asset(
