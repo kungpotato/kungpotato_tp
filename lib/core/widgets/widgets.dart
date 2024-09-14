@@ -6,3 +6,4 @@ export './kp_title.dart';
 export './kp_video.dart';
 export './layout.dart';
 export './menu_scroll.dart';
+export './suggest_scroll.dart';
