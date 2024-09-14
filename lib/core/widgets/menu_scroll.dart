@@ -109,7 +109,11 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
   Widget itemWidget(MenuItem item) {
     final theme = Theme.of(context);
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (widget.onTap != null) {
+          widget.onTap!.call(0, item);
+        }
+      },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
