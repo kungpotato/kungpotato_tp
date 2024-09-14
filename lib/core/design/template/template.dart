@@ -12,7 +12,6 @@ import 'package:kungpotato/core/design/template/product_detail.dart';
 import 'package:kungpotato/core/widgets/image_slide.dart';
 import 'package:kungpotato/core/widgets/kp_tab.dart';
 import 'package:kungpotato/core/widgets/layout.dart';
-import 'package:kungpotato/core/widgets/menu_scroll.dart';
 
 class Template extends StatelessWidget {
   const Template({super.key});
@@ -156,16 +155,6 @@ class _TabOne extends StatelessWidget {
               left: KPGapSize.extraLargeXlW.width,
             ),
             child: const KpCoupon(),
-          ),
-          KPGap.largeH(),
-          Padding(
-            padding: EdgeInsets.only(
-              right: KPGapSize.extraLargeXlW.width,
-              left: KPGapSize.extraLargeXlW.width,
-            ),
-            child: const KpMenuScroll(
-              menuList: [],
-            ),
           ),
           KPGap.largeH(),
           Padding(
