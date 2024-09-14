@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SearchWidget extends StatelessWidget {
-  const SearchWidget({this.onTap, this.colors, super.key});
+class SearchInput extends StatelessWidget {
+  const SearchInput({this.onTap, this.colors, super.key});
 
   final void Function()? onTap;
   final List<Color>? colors;
