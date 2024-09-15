@@ -115,7 +115,7 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
     return InkWell(
       onTap: () {
         if (widget.onTap != null) {
-          widget.onTap!.call(0, item);
+          widget.onTap!.call(i, item);
         }
       },
       child: Column(
