@@ -50,10 +50,12 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
               spacing: 2,
               runSpacing: 15,
               children: widget.menuList
+                  .asMap()
+                  .entries
                   .map(
                     (e) => SizedBox(
                       width: (MediaQuery.of(context).size.width - 50) / 5,
-                      child: itemWidget(e),
+                      child: itemWidget(e.key, e.value),
                     ),
                   )
                   .toList(),
@@ -72,8 +74,10 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: widget.subMenuList == null
                           ? widget.menuList
+                              .asMap()
+                              .entries
                               .map(
-                                itemWidget,
+                                (e) => itemWidget(e.key, e.value),
                               )
                               .toList()
                           : widget.subMenuList!
@@ -106,7 +110,7 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
     );
   }
 
-  Widget itemWidget(MenuItem item) {
+  Widget itemWidget(int i, MenuItem item) {
     final theme = Theme.of(context);
     return InkWell(
       onTap: () {
