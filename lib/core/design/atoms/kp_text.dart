@@ -6,7 +6,9 @@ class KPText extends Text {
     this.txt, {
     super.key,
     super.style = const TextStyle(fontSize: 14),
-  }) : super(txt ?? '', maxLines: 2, overflow: TextOverflow.ellipsis);
+    super.overflow = TextOverflow.ellipsis,
+    super.maxLines = 2,
+  }) : super(txt ?? '');
 
   factory KPText.text(String text) {
     return KPText(
@@ -17,10 +19,24 @@ class KPText extends Text {
     );
   }
 
-  factory KPText.label(String text) {
+  factory KPText.label1(String text) {
     return KPText(
       text,
       style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
+    );
+  }
+
+  factory KPText.label2(String text) {
+    return KPText(
+      text,
+      style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
+    );
+  }
+
+  factory KPText.label3(String text) {
+    return KPText(
+      text,
+      style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
     );
   }
 

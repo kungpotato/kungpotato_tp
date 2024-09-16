@@ -9,3 +9,4 @@ export './core/design/molecules/molecules.dart';
 export './core/design/template/template.dart';
 export './core/theme/theme.dart';
 export './core/widgets/widgets.dart';
+export './extensions/extensions.dart';

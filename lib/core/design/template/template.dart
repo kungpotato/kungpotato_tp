@@ -5,8 +5,8 @@ import 'package:kungpotato/core/design/atoms/kp_gap.dart';
 import 'package:kungpotato/core/design/atoms/kp_outline_button.dart';
 import 'package:kungpotato/core/design/atoms/kp_text.dart';
 import 'package:kungpotato/core/design/molecules/coupon.dart';
+import 'package:kungpotato/core/design/molecules/course_card.dart';
 import 'package:kungpotato/core/design/molecules/kp_appbar.dart';
-import 'package:kungpotato/core/design/molecules/product_card.dart';
 import 'package:kungpotato/core/design/molecules/product_list.dart';
 import 'package:kungpotato/core/design/template/product_detail.dart';
 import 'package:kungpotato/core/widgets/image_slide.dart';
@@ -165,13 +165,12 @@ class _TabOne extends StatelessWidget {
             child: KpProductList(
               children: List.generate(
                 6,
-                (index) => KpProductCard(
+                (index) => KpCourseCard(
                   title: 'ผักชี',
                   imageUrl:
                       'https://s359.kapook.com//pagebuilder/c66d622b-7652-4c23-8272-1d1083fa3ef0.jpg',
-                  price: 30,
-                  rating: 2,
-                  oldPrice: 50,
+                  like: 2,
+                  learning: 20,
                   onTap: () {
                     Navigator.push(
                       context,

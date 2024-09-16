@@ -1,34 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:icons_plus/icons_plus.dart';
 import 'package:kungpotato/core/design/atoms/atoms.dart';
 import 'package:kungpotato/core/widgets/kp_image.dart';
+import 'package:kungpotato/extensions/num_extension.dart';
 
-class KpProductCard extends StatefulWidget {
-  const KpProductCard({
+class KpCourseCard extends StatefulWidget {
+  const KpCourseCard({
     required this.imageUrl,
     required this.title,
-    this.price,
     this.onTap,
     this.onFavoriteTap,
-    this.rating,
-    this.oldPrice,
+    this.like,
+    this.learning,
     this.isFavorite = false,
     super.key,
   });
 
   final String imageUrl;
   final String title;
-  final double? price;
-  final double? rating;
-  final double? oldPrice;
+
+  final double? like;
+  final double? learning;
+
   final bool isFavorite;
   final void Function()? onTap;
   final void Function()? onFavoriteTap;
 
   @override
-  State<KpProductCard> createState() => _KpProductCardState();
+  State<KpCourseCard> createState() => _KpProductCardState();
 }
 
-class _KpProductCardState extends State<KpProductCard> {
+class _KpProductCardState extends State<KpCourseCard> {
   bool favorite = false;
 
   @override
@@ -106,76 +108,65 @@ class _KpProductCardState extends State<KpProductCard> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             // Product Title
-                            Text(
-                              widget.title,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.bold,
+                            Flexible(
+                              child: KPText.subtitle(
+                                widget.title,
                               ),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
                             ),
                             // Product Price and Old Price
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                if (widget.price != null)
-                                  Row(
-                                    children: [
-                                      Text(
-                                        '\$${widget.price!.toStringAsFixed(2)}',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: Colors.green[700],
-                                          fontWeight: FontWeight.bold,
+                            Flexible(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Flexible(
+                                    child: Row(
+                                      children: [
+                                        KPText.label2(
+                                          'ผู้สอน:',
                                         ),
-                                      ),
-                                      const SizedBox(width: 10),
-                                      if (widget.oldPrice != null &&
-                                          widget.oldPrice! > widget.price!)
-                                        Text(
-                                          '\$${widget.oldPrice!.toStringAsFixed(2)}',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            color: Colors.red[700],
-                                            decoration:
-                                                TextDecoration.lineThrough,
-                                          ),
+                                        const SizedBox(width: 5),
+                                        KPText.label2(
+                                          'xxx',
                                         ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    if (widget.rating != null)
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.star,
-                                            size: 12,
-                                            color: Colors.yellow[700],
+                                  Flexible(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        if (widget.like != null)
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                FontAwesome.thumbs_up,
+                                                size: 12,
+                                                color: Colors.blue.shade700,
+                                              ),
+                                              const SizedBox(width: 4),
+                                              Text(
+                                                widget.like!.toSuffixString(),
+                                                style: const TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
                                           ),
-                                          const SizedBox(width: 4),
-                                          Text(
-                                            widget.rating.toString(),
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w500,
+                                        if (widget.learning != null)
+                                          KPText(
+                                            '${widget.learning!.toSuffixString()} คนกำลังเรียน ',
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              color: Colors.grey.shade700,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                    KPText(
-                                      'ขายแล้ว 20 ชิ้น',
-                                      style: TextStyle(
-                                        fontSize: 10,
-                                        color: Colors.grey.shade700,
-                                      ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -187,30 +178,27 @@ class _KpProductCardState extends State<KpProductCard> {
             ),
             // Discount Badge
 
-            if ((widget.price != null) &&
-                widget.oldPrice != null &&
-                widget.oldPrice! > widget.price!)
-              Positioned(
-                top: 0,
-                left: 0,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: Colors.red.shade700,
-                    borderRadius:
-                        const BorderRadius.only(topLeft: Radius.circular(20)),
-                  ),
-                  child: KPText(
-                    '-${((1 - widget.price! / widget.oldPrice!) * 100).toStringAsFixed(0)}%',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
+            Positioned(
+              top: 0,
+              left: 0,
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                decoration: BoxDecoration(
+                  color: Colors.red.shade700,
+                  borderRadius:
+                      const BorderRadius.only(topLeft: Radius.circular(20)),
+                ),
+                child: const KPText(
+                  'ใหม่',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
                   ),
                 ),
               ),
+            ),
             // Favorite Icon
             Positioned(
               top: 0,

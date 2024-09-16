@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kungpotato/core/design/molecules/product_card.dart';
 
 class KpProductList extends StatefulWidget {
   const KpProductList({required this.children, super.key});
 
-  final List<KpProductCard> children;
+  final List<Widget> children;
 
   @override
   State<KpProductList> createState() => _KpProductListState();
