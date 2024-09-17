@@ -14,9 +14,9 @@ class KpVideoPlayer extends StatefulWidget {
 }
 
 class KpVideoPlayerState extends State<KpVideoPlayer> {
-  late CachedVideoPlayerController _videoPlayerController;
-  late CustomVideoPlayerController _customVideoPlayerController;
-  late CustomVideoPlayerSettings _customVideoPlayerSettings;
+  CachedVideoPlayerController? _videoPlayerController;
+  CustomVideoPlayerController? _customVideoPlayerController;
+  CustomVideoPlayerSettings? _customVideoPlayerSettings;
 
   @override
   void initState() {
@@ -26,8 +26,8 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
-    _customVideoPlayerController.dispose();
+    _videoPlayerController?.dispose();
+    _customVideoPlayerController?.dispose();
     super.dispose();
   }
 
@@ -35,8 +35,8 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   void didUpdateWidget(covariant KpVideoPlayer oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoUrl != widget.videoUrl) {
-      _videoPlayerController.dispose();
-      _customVideoPlayerController.dispose();
+      _videoPlayerController?.dispose();
+      _customVideoPlayerController?.dispose();
       _initializeVideoPlayer();
     }
   }
@@ -67,7 +67,7 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
       _videoPlayerController =
           CachedVideoPlayerController.network(widget.videoUrl);
 
-      _videoPlayerController.initialize().then(
+      _videoPlayerController?.initialize().then(
         (_) {
           if (mounted) {
             setState(() {});
@@ -77,17 +77,19 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
 
       _customVideoPlayerController = CustomVideoPlayerController(
         context: context,
-        videoPlayerController: _videoPlayerController,
-        customVideoPlayerSettings: _customVideoPlayerSettings,
+        videoPlayerController: _videoPlayerController!,
+        customVideoPlayerSettings: _customVideoPlayerSettings!,
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return _videoPlayerController.value.isInitialized
+    return (_videoPlayerController != null &&
+            _customVideoPlayerController != null &&
+            _videoPlayerController!.value.isInitialized)
         ? CustomVideoPlayer(
-            customVideoPlayerController: _customVideoPlayerController,
+            customVideoPlayerController: _customVideoPlayerController!,
           )
         : const Center(child: CircularProgressIndicator.adaptive());
   }
