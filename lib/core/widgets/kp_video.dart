@@ -60,7 +60,7 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
       exitFullscreenButton: const Icon(Icons.fullscreen_exit),
       playButton: const Icon(Icons.play_arrow),
       pauseButton: const Icon(Icons.pause),
-      settingsButton: const Icon(Icons.settings),
+      settingsButtonAvailable: false,
       thumbnailWidget: widget.thumbnail != null
           ? SizedBox(
               width: double.maxFinite,
