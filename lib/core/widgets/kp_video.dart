@@ -48,7 +48,7 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
     }
   }
 
-  void _initializeVideoPlayer() {
+  Future<void> _initializeVideoPlayer() async {
     _customVideoPlayerSettings = CustomVideoPlayerSettings(
       showSeekButtons: true,
       exitFullscreenOnEnd: true,
@@ -74,21 +74,17 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
       _videoPlayerController =
           CachedVideoPlayerController.network(widget.videoUrl);
 
-      _videoPlayerController.initialize().then(
-        (_) {
-          if (mounted) {
-            setState(() {});
-          }
-        },
-      );
+      await _videoPlayerController.initialize();
 
       _videoPlayerController.addListener(_videoPlayerListener);
 
-      _customVideoPlayerController = CustomVideoPlayerController(
-        context: context,
-        videoPlayerController: _videoPlayerController,
-        customVideoPlayerSettings: _customVideoPlayerSettings,
-      );
+      if (mounted) {
+        _customVideoPlayerController = CustomVideoPlayerController(
+          context: context,
+          videoPlayerController: _videoPlayerController,
+          customVideoPlayerSettings: _customVideoPlayerSettings,
+        );
+      }
     }
   }
 
@@ -105,6 +101,7 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   Widget build(BuildContext context) {
     return (_videoPlayerController.value.isInitialized)
         ? CustomVideoPlayer(
+            key: ValueKey(widget.videoUrl),
             customVideoPlayerController: _customVideoPlayerController,
           )
         : const Center(child: CircularProgressIndicator.adaptive());
