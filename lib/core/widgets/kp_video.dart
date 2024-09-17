@@ -20,7 +20,26 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   @override
   void initState() {
     super.initState();
+    _initializeVideoPlayer();
+  }
 
+  @override
+  void dispose() {
+    _videoPlayerController.dispose();
+    _customVideoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(covariant KpVideoPlayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.videoUrl != widget.videoUrl) {
+      _videoPlayerController.dispose();
+      _initializeVideoPlayer();
+    }
+  }
+
+  void _initializeVideoPlayer() {
     _customVideoPlayerSettings = CustomVideoPlayerSettings(
       showSeekButtons: true,
       enterFullscreenButton: const Icon(Icons.fullscreen),
@@ -50,13 +69,6 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
       videoPlayerController: _videoPlayerController,
       customVideoPlayerSettings: _customVideoPlayerSettings,
     );
-  }
-
-  @override
-  void dispose() {
-    _videoPlayerController.dispose();
-    _customVideoPlayerController.dispose();
-    super.dispose();
   }
 
   @override
