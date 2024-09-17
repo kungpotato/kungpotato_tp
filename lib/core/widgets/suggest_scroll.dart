@@ -4,8 +4,11 @@ import 'package:kungpotato/core/widgets/kp_image.dart';
 import 'package:scroll_indicator/scroll_indicator.dart';
 
 class KpSuggestScroll extends StatefulWidget {
-  const KpSuggestScroll(
-      {required this.options, super.key, this.isTwoLine = false});
+  const KpSuggestScroll({
+    required this.options,
+    super.key,
+    this.isTwoLine = false,
+  });
 
   final bool isTwoLine;
   final List<SuggestItem> options;

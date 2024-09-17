@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kungpotato/kungpotato.dart';
+import 'package:kungpotato/template.dart';
 
 void main() {
   KpColorSeed.instance.primary = const Color(0xff4ebe65);

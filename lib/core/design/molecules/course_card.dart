@@ -13,12 +13,13 @@ class KpCourseCard extends StatefulWidget {
     this.like,
     this.learning,
     this.isFavorite = false,
+    this.teacher,
     super.key,
   });
 
   final String imageUrl;
   final String title;
-
+  final String? teacher;
   final double? like;
   final double? learning;
 
@@ -126,7 +127,7 @@ class _KpProductCardState extends State<KpCourseCard> {
                                         ),
                                         const SizedBox(width: 5),
                                         KPText.label2(
-                                          'xxx',
+                                          widget.teacher ?? '',
                                         ),
                                       ],
                                     ),

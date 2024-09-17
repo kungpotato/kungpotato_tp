@@ -7,7 +7,7 @@ extension NumberToSuffix on num {
     } else if (this >= 1e3) {
       return '${(this / 1e3).toStringAsFixed(1)}K';
     } else {
-      return this.toStringAsFixed(0); // No suffix for smaller numbers
+      return toStringAsFixed(0); // No suffix for smaller numbers
     }
   }
 }
