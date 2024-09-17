@@ -36,6 +36,7 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoUrl != widget.videoUrl) {
       _videoPlayerController.dispose();
+      _customVideoPlayerController.dispose();
       _initializeVideoPlayer();
     }
   }
