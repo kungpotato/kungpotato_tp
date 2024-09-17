@@ -118,21 +118,10 @@ class _KpProductCardState extends State<KpCourseCard> {
                             Flexible(
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Flexible(
-                                    child: Row(
-                                      children: [
-                                        KPText.label2(
-                                          'ผู้สอน:',
-                                        ),
-                                        const SizedBox(width: 5),
-                                        Expanded(
-                                          child: KPText.label2(
-                                            widget.teacher ?? '',
-                                          ),
-                                        ),
-                                      ],
-                                    ),
+                                  KPText.label3(
+                                    'ผู้สอน : ${widget.teacher ?? ''}',
                                   ),
                                   Flexible(
                                     child: Row(
