@@ -1,5 +1,6 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:kungpotato/core/widgets/kp_image.dart';
 
 class KpVideoPlayer extends StatefulWidget {
@@ -42,6 +43,11 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   void _initializeVideoPlayer() {
     _customVideoPlayerSettings = CustomVideoPlayerSettings(
       showSeekButtons: true,
+      exitFullscreenOnEnd: true,
+      deviceOrientationsAfterFullscreen: [
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ],
       enterFullscreenButton: const Icon(Icons.fullscreen),
       exitFullscreenButton: const Icon(Icons.fullscreen_exit),
       playButton: const Icon(Icons.play_arrow),
