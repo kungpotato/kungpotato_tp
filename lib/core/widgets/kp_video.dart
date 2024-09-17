@@ -75,6 +75,7 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
           CachedVideoPlayerController.network(widget.videoUrl);
 
       await _videoPlayerController.initialize();
+      setState(() {});
 
       _videoPlayerController.addListener(_videoPlayerListener);
 
