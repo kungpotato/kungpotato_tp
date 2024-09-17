@@ -4,10 +4,16 @@ import 'package:flutter/services.dart';
 import 'package:kungpotato/core/widgets/kp_image.dart';
 
 class KpVideoPlayer extends StatefulWidget {
-  const KpVideoPlayer({required this.videoUrl, this.thumbnail, super.key});
+  const KpVideoPlayer({
+    required this.videoUrl,
+    this.onFinish,
+    this.thumbnail,
+    super.key,
+  });
 
   final String videoUrl;
   final String? thumbnail;
+  final Function()? onFinish;
 
   @override
   KpVideoPlayerState createState() => KpVideoPlayerState();
@@ -26,20 +32,11 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
 
   @override
   void dispose() {
+    _videoPlayerController.removeListener(_videoPlayerListener);
     _videoPlayerController.dispose();
     _customVideoPlayerController.dispose();
     super.dispose();
   }
-
-  // @override
-  // void didUpdateWidget(covariant KpVideoPlayer oldWidget) {
-  //   super.didUpdateWidget(oldWidget);
-  //   if (oldWidget.videoUrl != widget.videoUrl) {
-  //     _videoPlayerController.dispose();
-  //     _customVideoPlayerController.dispose();
-  //     _initializeVideoPlayer();
-  //   }
-  // }
 
   void _initializeVideoPlayer() {
     _customVideoPlayerSettings = CustomVideoPlayerSettings(
@@ -75,11 +72,22 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
         },
       );
 
+      _videoPlayerController.addListener(_videoPlayerListener);
+
       _customVideoPlayerController = CustomVideoPlayerController(
         context: context,
-        videoPlayerController: _videoPlayerController!,
-        customVideoPlayerSettings: _customVideoPlayerSettings!,
+        videoPlayerController: _videoPlayerController,
+        customVideoPlayerSettings: _customVideoPlayerSettings,
       );
+    }
+  }
+
+  void _videoPlayerListener() {
+    if (_videoPlayerController.value.position ==
+        _videoPlayerController.value.duration) {
+      if (widget.onFinish != null) {
+        widget.onFinish!.call();
+      }
     }
   }
 
