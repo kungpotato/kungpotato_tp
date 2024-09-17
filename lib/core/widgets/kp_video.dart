@@ -38,6 +38,16 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
     super.dispose();
   }
 
+  @override
+  void didUpdateWidget(covariant KpVideoPlayer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.videoUrl != widget.videoUrl) {
+      _videoPlayerController.dispose();
+      _customVideoPlayerController.dispose();
+      _initializeVideoPlayer();
+    }
+  }
+
   void _initializeVideoPlayer() {
     _customVideoPlayerSettings = CustomVideoPlayerSettings(
       showSeekButtons: true,
