@@ -62,20 +62,21 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
           : null,
       placeholderWidget: const Icon(Icons.ac_unit),
     );
+    if (mounted) {
+      _videoPlayerController =
+          CachedVideoPlayerController.network(widget.videoUrl)
+            ..initialize().then(
+              (_) {
+                setState(() {});
+              },
+            );
 
-    _videoPlayerController =
-        CachedVideoPlayerController.network(widget.videoUrl)
-          ..initialize().then(
-            (_) {
-              setState(() {});
-            },
-          );
-
-    _customVideoPlayerController = CustomVideoPlayerController(
-      context: context,
-      videoPlayerController: _videoPlayerController,
-      customVideoPlayerSettings: _customVideoPlayerSettings,
-    );
+      _customVideoPlayerController = CustomVideoPlayerController(
+        context: context,
+        videoPlayerController: _videoPlayerController,
+        customVideoPlayerSettings: _customVideoPlayerSettings,
+      );
+    }
   }
 
   @override
