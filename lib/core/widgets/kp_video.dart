@@ -1,109 +1,70 @@
-import 'package:flick_video_player/flick_video_player.dart';
+import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
-import 'package:video_player/video_player.dart';
+import 'package:kungpotato/core/widgets/kp_image.dart';
 
 class KpVideoPlayer extends StatefulWidget {
-  const KpVideoPlayer({required this.videoUrl, super.key});
+  const KpVideoPlayer({required this.videoUrl, this.thumbnail, super.key});
 
   final String videoUrl;
+  final String? thumbnail;
 
   @override
   KpVideoPlayerState createState() => KpVideoPlayerState();
 }
 
 class KpVideoPlayerState extends State<KpVideoPlayer> {
-  late FlickManager _flickManager;
+  late CachedVideoPlayerController _videoPlayerController;
+  late CustomVideoPlayerController _customVideoPlayerController;
+  late CustomVideoPlayerSettings _customVideoPlayerSettings;
 
   @override
   void initState() {
     super.initState();
-    _flickManager = FlickManager(
-      videoPlayerController:
-          VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl)),
+
+    _customVideoPlayerSettings = CustomVideoPlayerSettings(
+      showSeekButtons: true,
+      enterFullscreenButton: const Icon(Icons.fullscreen),
+      exitFullscreenButton: const Icon(Icons.fullscreen_exit),
+      playButton: const Icon(Icons.play_arrow),
+      pauseButton: const Icon(Icons.pause),
+      settingsButton: const Icon(Icons.settings),
+      thumbnailWidget: widget.thumbnail != null
+          ? SizedBox(
+              width: double.maxFinite,
+              child: KpImage.network(widget.thumbnail!),
+            )
+          : null,
+      placeholderWidget: const Icon(Icons.ac_unit),
+    );
+
+    _videoPlayerController =
+        CachedVideoPlayerController.network(widget.videoUrl)
+          ..initialize().then(
+            (_) {
+              setState(() {});
+            },
+          );
+
+    _customVideoPlayerController = CustomVideoPlayerController(
+      context: context,
+      videoPlayerController: _videoPlayerController,
+      customVideoPlayerSettings: _customVideoPlayerSettings,
     );
   }
 
   @override
   void dispose() {
-    _flickManager.dispose();
+    _videoPlayerController.dispose();
+    _customVideoPlayerController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 16 / 9,
-      child: FlickVideoPlayer(
-        flickManager: _flickManager,
-        flickVideoWithControls: FlickVideoWithControls(
-          controls: CustomFlickControls(manager: _flickManager),
-        ),
-        flickVideoWithControlsFullscreen: FlickVideoWithControls(
-          controls: CustomFlickControls(manager: _flickManager),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomFlickControls extends StatefulWidget {
-  const CustomFlickControls({required this.manager, super.key});
-
-  final FlickManager manager;
-
-  @override
-  State<CustomFlickControls> createState() => _CustomFlickControlsState();
-}
-
-class _CustomFlickControlsState extends State<CustomFlickControls> {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            IconButton(
-              icon: const Icon(Icons.replay_10),
-              onPressed: () {
-                widget.manager.flickControlManager!
-                    .seekBackward(const Duration(seconds: 10));
-              },
-            ),
-            IconButton(
-              icon: widget.manager.flickVideoManager!.isPlaying
-                  ? const Icon(Icons.pause)
-                  : const Icon(Icons.play_arrow),
-              onPressed: () {
-                widget.manager.flickVideoManager!.isPlaying
-                    ? widget.manager.flickControlManager!.pause()
-                    : widget.manager.flickControlManager!.play();
-                setState(() {});
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.forward_10),
-              onPressed: () {
-                widget.manager.flickControlManager!
-                    .seekForward(const Duration(seconds: 10));
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.replay),
-              onPressed: () {
-                widget.manager.flickControlManager!.seekTo(Duration.zero);
-                widget.manager.flickControlManager!.play();
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.fullscreen),
-              onPressed: widget.manager.flickControlManager!.toggleFullscreen,
-            ),
-          ],
-        ),
-        const SizedBox(height: 20),
-      ],
-    );
+    return _videoPlayerController.value.isInitialized
+        ? CustomVideoPlayer(
+            customVideoPlayerController: _customVideoPlayerController,
+          )
+        : const Center(child: CircularProgressIndicator.adaptive());
   }
 }

@@ -1,17 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:icons_plus/icons_plus.dart';
-import 'package:kungpotato/core/design/atoms/kp_button.dart';
-import 'package:kungpotato/core/design/atoms/kp_gap.dart';
-import 'package:kungpotato/core/design/atoms/kp_outline_button.dart';
-import 'package:kungpotato/core/design/atoms/kp_text.dart';
-import 'package:kungpotato/core/design/molecules/coupon.dart';
 import 'package:kungpotato/core/design/molecules/course_card.dart';
-import 'package:kungpotato/core/design/molecules/kp_appbar.dart';
-import 'package:kungpotato/core/design/molecules/product_list.dart';
-import 'package:kungpotato/core/design/template/product_detail.dart';
-import 'package:kungpotato/core/widgets/image_slide.dart';
-import 'package:kungpotato/core/widgets/kp_tab.dart';
-import 'package:kungpotato/core/widgets/layout.dart';
+
+import 'kungpotato.dart';
 
 class Template extends StatelessWidget {
   const Template({super.key});
@@ -296,12 +286,15 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: KPGapSize.mediumW.width,
-        right: KPGapSize.mediumW.width,
-      ),
-      child: const SizedBox(),
+    return const Column(
+      children: [
+        KpVideoPlayer(
+          videoUrl:
+              'https://jsoncompare.org/LearningContainer/SampleFiles/Video/MP4/Sample-MP4-Video-File-Download.mp4',
+          thumbnail:
+              'https://f.ptcdn.info/881/079/000/rqdl9y1v43NdNp69jXcX-o.jpg',
+        ),
+      ],
     );
   }
 }
