@@ -40,6 +40,13 @@ class KPText extends Text {
     );
   }
 
+  factory KPText.label4(String text) {
+    return KPText(
+      text,
+      style: TextStyle(fontSize: 10, color: Colors.grey.shade700),
+    );
+  }
+
   factory KPText.head1(String? text) {
     return KPText(
       text,
