@@ -126,8 +126,10 @@ class _KpProductCardState extends State<KpCourseCard> {
                                           'ผู้สอน:',
                                         ),
                                         const SizedBox(width: 5),
-                                        KPText.label2(
-                                          widget.teacher ?? '',
+                                        Expanded(
+                                          child: KPText.label2(
+                                            widget.teacher ?? '',
+                                          ),
                                         ),
                                       ],
                                     ),
