@@ -1,37 +1,41 @@
+import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:video_player/video_player.dart';
 
 class KpVideoPlayer extends StatefulWidget {
   const KpVideoPlayer({
     required this.videoUrl,
     this.onFinish,
     this.thumbnail,
+    this.startAt,
     super.key,
   });
 
   final String videoUrl;
   final String? thumbnail;
   final Function()? onFinish;
+  final Duration? startAt;
 
   @override
   KpVideoPlayerState createState() => KpVideoPlayerState();
 }
 
 class KpVideoPlayerState extends State<KpVideoPlayer> {
-  // late CachedVideoPlayerController _videoPlayerController;
-  // late CustomVideoPlayerController _customVideoPlayerController;
-  // late CustomVideoPlayerSettings _customVideoPlayerSettings;
+  late FlickManager flickManager;
+  Duration? _lastPosition;
 
   @override
   void initState() {
     super.initState();
+    _loadLastPosition();
     _initializeVideoPlayer();
   }
 
   @override
   void dispose() {
-    // _videoPlayerController.removeListener(_videoPlayerListener);
-    // _videoPlayerController.dispose();
-    // _customVideoPlayerController.dispose();
+    _saveLastPosition();
+    flickManager.dispose();
     super.dispose();
   }
 
@@ -39,70 +43,62 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   void didUpdateWidget(covariant KpVideoPlayer oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoUrl != widget.videoUrl) {
-      // _videoPlayerController.dispose();
-      // _customVideoPlayerController.dispose();
+      flickManager.dispose();
       _initializeVideoPlayer();
     }
   }
 
-  Future<void> _initializeVideoPlayer() async {
-    // _customVideoPlayerSettings = CustomVideoPlayerSettings(
-    //   showSeekButtons: true,
-    //   exitFullscreenOnEnd: true,
-    //   deviceOrientationsAfterFullscreen: [
-    //     DeviceOrientation.portraitUp,
-    //     DeviceOrientation.portraitDown,
-    //   ],
-    //   enterFullscreenButton: const Icon(Icons.fullscreen),
-    //   exitFullscreenButton: const Icon(Icons.fullscreen_exit),
-    //   playButton: const Icon(Icons.play_arrow),
-    //   pauseButton: const Icon(Icons.pause),
-    //   settingsButtonAvailable: false,
-    //   thumbnailWidget: widget.thumbnail != null
-    //       ? SizedBox(
-    //           width: double.maxFinite,
-    //           child: KpImage.network(widget.thumbnail!),
-    //         )
-    //       : null,
-    //   placeholderWidget: const Icon(Icons.ac_unit),
-    // );
-    //
-    // if (mounted) {
-    //   _videoPlayerController =
-    //       CachedVideoPlayerController.network(widget.videoUrl);
-    //
-    //   await _videoPlayerController.initialize();
-    //   setState(() {});
-    //
-    //   _videoPlayerController.addListener(_videoPlayerListener);
-    //
-    //   if (mounted) {
-    //     _customVideoPlayerController = CustomVideoPlayerController(
-    //       context: context,
-    //       videoPlayerController: _videoPlayerController,
-    //       customVideoPlayerSettings: _customVideoPlayerSettings,
-    //     );
-    //   }
-    // }
+  void _initializeVideoPlayer() {
+    if (mounted) {
+      flickManager = FlickManager(
+        videoPlayerController: VideoPlayerController.networkUrl(
+          Uri.parse(widget.videoUrl),
+        ),
+        onVideoEnd: widget.onFinish,
+      );
+
+      // Set the initial start position if provided or use the saved last position
+      flickManager.flickVideoManager?.videoPlayerController?.addListener(() {
+        if (flickManager.flickVideoManager!.isPlaying) {
+          _saveLastPosition();
+        }
+      });
+
+      if (_lastPosition != null) {
+        flickManager.flickVideoManager?.videoPlayerController
+            ?.seekTo(_lastPosition!);
+      } else if (widget.startAt != null) {
+        flickManager.flickVideoManager?.videoPlayerController
+            ?.seekTo(widget.startAt!);
+      }
+    }
   }
 
-  void _videoPlayerListener() {
-    // if (_videoPlayerController.value.position ==
-    //     _videoPlayerController.value.duration) {
-    //   if (widget.onFinish != null) {
-    //     widget.onFinish!.call();
-    //   }
-    // }
+  Future<void> _loadLastPosition() async {
+    final prefs = await SharedPreferences.getInstance();
+    final savedPosition = prefs.getInt('lastPosition_${widget.videoUrl}');
+    if (savedPosition != null) {
+      setState(() {
+        _lastPosition = Duration(milliseconds: savedPosition);
+      });
+    }
+  }
+
+  Future<void> _saveLastPosition() async {
+    if (flickManager.flickVideoManager?.videoPlayerController != null) {
+      final prefs = await SharedPreferences.getInstance();
+      final position = flickManager.flickVideoManager?.videoPlayerController
+          ?.value.position.inMilliseconds;
+      if (position != null) {
+        await prefs.setInt('lastPosition_${widget.videoUrl}', position);
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // return (_videoPlayerController.value.isInitialized)
-    //     ? CustomVideoPlayer(
-    //         key: ValueKey(widget.videoUrl),
-    //         customVideoPlayerController: _customVideoPlayerController,
-    //       )
-    //     : const Center(child: CircularProgressIndicator.adaptive());
-    return const Placeholder();
+    return FlickVideoPlayer(
+      flickManager: flickManager,
+    );
   }
 }
