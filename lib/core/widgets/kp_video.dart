@@ -39,12 +39,11 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   }
 
   @override
-  Future<void> didUpdateWidget(covariant KpVideoPlayer oldWidget) async {
+  void didUpdateWidget(covariant KpVideoPlayer oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoUrl != widget.videoUrl) {
       flickManager?.dispose();
-      final res = await _loadLastPosition();
-      _initializeVideoPlayer(res);
+      _initializeVideoPlayer();
     }
   }
 
