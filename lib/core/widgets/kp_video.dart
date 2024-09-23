@@ -8,14 +8,12 @@ class KpVideoPlayer extends StatefulWidget {
     required this.videoUrl,
     this.onFinish,
     this.thumbnail,
-    this.startAt,
     super.key,
   });
 
   final String videoUrl;
   final String? thumbnail;
   final Function()? onFinish;
-  final Duration? startAt;
 
   @override
   KpVideoPlayerState createState() => KpVideoPlayerState();
@@ -23,14 +21,13 @@ class KpVideoPlayer extends StatefulWidget {
 
 class KpVideoPlayerState extends State<KpVideoPlayer> {
   FlickManager? flickManager;
-  Duration? _lastPosition;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-      await _loadLastPosition();
-      _initializeVideoPlayer();
+      final res = await _loadLastPosition();
+      _initializeVideoPlayer(res);
     });
   }
 
@@ -42,41 +39,47 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   }
 
   @override
-  void didUpdateWidget(covariant KpVideoPlayer oldWidget) {
+  Future<void> didUpdateWidget(covariant KpVideoPlayer oldWidget) async {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoUrl != widget.videoUrl) {
       flickManager?.dispose();
-      _initializeVideoPlayer();
+      final res = await _loadLastPosition();
+      _initializeVideoPlayer(res);
     }
   }
 
-  void _initializeVideoPlayer() {
+  void _initializeVideoPlayer([Duration? val]) {
     if (mounted) {
-      flickManager = FlickManager(
-        videoPlayerController: VideoPlayerController.networkUrl(
-          Uri.parse(widget.videoUrl),
-        ),
-        onVideoEnd: widget.onFinish,
+      final controller = VideoPlayerController.networkUrl(
+        Uri.parse(widget.videoUrl),
+        videoPlayerOptions: VideoPlayerOptions(allowBackgroundPlayback: true),
       );
 
-      if (_lastPosition != null) {
-        flickManager?.flickVideoManager?.videoPlayerController
-            ?.seekTo(_lastPosition!);
-      } else if (widget.startAt != null) {
-        flickManager?.flickVideoManager?.videoPlayerController
-            ?.seekTo(widget.startAt!);
-      }
+      flickManager = FlickManager(
+        videoPlayerController: controller,
+        onVideoEnd: widget.onFinish,
+        autoPlay: false,
+      );
+
+      setState(() {});
+
+      Future.delayed(
+        const Duration(seconds: 1),
+        () {
+          if (val != null) {
+            controller.seekTo(val);
+            flickManager?.flickControlManager?.seekTo(val);
+            flickManager?.flickVideoManager?.videoPlayerController?.seekTo(val);
+          }
+        },
+      );
     }
   }
 
-  Future<void> _loadLastPosition() async {
+  Future<Duration?> _loadLastPosition() async {
     final prefs = await SharedPreferences.getInstance();
     final savedPosition = prefs.getInt('lastPosition_${widget.videoUrl}');
-    if (savedPosition != null) {
-      setState(() {
-        _lastPosition = Duration(milliseconds: savedPosition);
-      });
-    }
+    return Duration(milliseconds: savedPosition ?? 0);
   }
 
   Future<void> _saveLastPosition() async {
