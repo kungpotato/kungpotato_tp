@@ -22,20 +22,22 @@ class KpVideoPlayer extends StatefulWidget {
 }
 
 class KpVideoPlayerState extends State<KpVideoPlayer> {
-  late FlickManager flickManager;
+  FlickManager? flickManager;
   Duration? _lastPosition;
 
   @override
   void initState() {
     super.initState();
-    _loadLastPosition();
-    _initializeVideoPlayer();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await _loadLastPosition();
+      _initializeVideoPlayer();
+    });
   }
 
   @override
   void dispose() {
     _saveLastPosition();
-    flickManager.dispose();
+    flickManager?.dispose();
     super.dispose();
   }
 
@@ -43,7 +45,7 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   void didUpdateWidget(covariant KpVideoPlayer oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.videoUrl != widget.videoUrl) {
-      flickManager.dispose();
+      flickManager?.dispose();
       _initializeVideoPlayer();
     }
   }
@@ -57,18 +59,11 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
         onVideoEnd: widget.onFinish,
       );
 
-      // Set the initial start position if provided or use the saved last position
-      flickManager.flickVideoManager?.videoPlayerController?.addListener(() {
-        if (flickManager.flickVideoManager!.isPlaying) {
-          _saveLastPosition();
-        }
-      });
-
       if (_lastPosition != null) {
-        flickManager.flickVideoManager?.videoPlayerController
+        flickManager?.flickVideoManager?.videoPlayerController
             ?.seekTo(_lastPosition!);
       } else if (widget.startAt != null) {
-        flickManager.flickVideoManager?.videoPlayerController
+        flickManager?.flickVideoManager?.videoPlayerController
             ?.seekTo(widget.startAt!);
       }
     }
@@ -85,9 +80,9 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
   }
 
   Future<void> _saveLastPosition() async {
-    if (flickManager.flickVideoManager?.videoPlayerController != null) {
+    if (flickManager?.flickVideoManager?.videoPlayerController != null) {
       final prefs = await SharedPreferences.getInstance();
-      final position = flickManager.flickVideoManager?.videoPlayerController
+      final position = flickManager?.flickVideoManager?.videoPlayerController
           ?.value.position.inMilliseconds;
       if (position != null) {
         await prefs.setInt('lastPosition_${widget.videoUrl}', position);
@@ -97,8 +92,10 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    return FlickVideoPlayer(
-      flickManager: flickManager,
-    );
+    return flickManager != null
+        ? FlickVideoPlayer(
+            flickManager: flickManager!,
+          )
+        : const CircularProgressIndicator.adaptive();
   }
 }
