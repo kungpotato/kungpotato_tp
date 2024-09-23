@@ -94,9 +94,26 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return flickManager != null
         ? FlickVideoPlayer(
             flickManager: flickManager!,
+            flickVideoWithControls: FlickVideoWithControls(
+              controls: FlickPortraitControls(
+                progressBarSettings: FlickProgressBarSettings(
+                  playedColor: const Color.fromRGBO(0, 122, 255, 1),
+                  bufferedColor: const Color.fromRGBO(100, 100, 100, 0.5),
+                  handleColor: const Color.fromRGBO(255, 215, 0, 1),
+                  backgroundColor: const Color.fromRGBO(220, 220, 220, 1),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 8,
+                  ),
+                  height: 5,
+                  handleRadius: 5,
+                  curveRadius: 5,
+                ),
+              ),
+            ),
           )
         : const CircularProgressIndicator.adaptive();
   }
