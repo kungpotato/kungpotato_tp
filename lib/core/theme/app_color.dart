@@ -26,7 +26,7 @@ class KpColorSeed {
 
   Color get warning => const Color(0xffffc107);
 
-  Color get info => const Color(0xff17a2b8);
+  Color get info => _primary ?? const Color(0xff17a2b8);
 
   Color get front => const Color(0xff2c3333);
 

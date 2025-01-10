@@ -318,10 +318,10 @@ packages:
     dependency: transitive
     description:
       name: getwidget
-      sha256: "91df14a8d80e21f3ec02759295b90cc8badb8a872b90d34ad4aeb4085d833b5c"
+      sha256: "064b034e0bd2becdac3ddc51a053f26435a2c7679a49012a4b66757ef065ccb3"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.0"
+    version: "5.0.0"
   glob:
     dependency: transitive
     description:
