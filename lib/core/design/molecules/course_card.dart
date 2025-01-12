@@ -14,6 +14,7 @@ class KpCourseCard extends StatefulWidget {
     this.learning,
     this.isFavorite = false,
     this.teacher,
+    this.isNew = true,
     super.key,
   });
 
@@ -22,6 +23,7 @@ class KpCourseCard extends StatefulWidget {
   final String? teacher;
   final double? like;
   final double? learning;
+  final bool? isNew;
 
   final bool isFavorite;
   final void Function()? onTap;
@@ -169,28 +171,28 @@ class _KpProductCardState extends State<KpCourseCard> {
               ],
             ),
             // Discount Badge
-
-            Positioned(
-              top: 0,
-              left: 0,
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
-                decoration: BoxDecoration(
-                  color: Colors.red.shade700,
-                  borderRadius:
-                      const BorderRadius.only(topLeft: Radius.circular(20)),
-                ),
-                child: const KPText(
-                  'ใหม่',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 14,
+            if (widget.isNew ?? false)
+              Positioned(
+                top: 0,
+                left: 0,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                  decoration: BoxDecoration(
+                    color: Colors.red.shade700,
+                    borderRadius:
+                        const BorderRadius.only(topLeft: Radius.circular(20)),
+                  ),
+                  child: const KPText(
+                    'ใหม่',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 14,
+                    ),
                   ),
                 ),
               ),
-            ),
             // Favorite Icon
             Positioned(
               top: 0,

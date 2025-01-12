@@ -23,6 +23,7 @@ dependencies:
   reactive_forms_generator: ^5.1.1
   shared_preferences: ^2.3.4
   scroll_date_picker: ^3.8.0
+  flutter_widget_from_html: ^0.15.3
 
 dev_dependencies:
   flutter_test:
