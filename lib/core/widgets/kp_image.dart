@@ -91,8 +91,6 @@ class KpImage extends StatelessWidget {
           width: width,
           height: height,
         );
-      default:
-        throw UnimplementedError('Unknown image type');
     }
   }
 

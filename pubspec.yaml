@@ -24,6 +24,7 @@ dependencies:
   shared_preferences: ^2.3.4
   scroll_date_picker: ^3.8.0
   flutter_widget_from_html: ^0.15.3
+  color_type_converter: ^1.0.5
 
 dev_dependencies:
   flutter_test:

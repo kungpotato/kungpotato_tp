@@ -1,8 +1,8 @@
+import 'package:color_type_converter/color_type_converter.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kungpotato/core/theme/app_appbar.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
-import 'package:kungpotato/helpers/utils.dart';
 
 final inputDecoration = InputDecorationTheme(
   border: const UnderlineInputBorder(
@@ -48,7 +48,8 @@ class MyThemes {
       fillColor: WidgetStateProperty.all(KpColorSeed.instance.primary),
     ),
     primaryColor: KpColorSeed.instance.primary,
-    primarySwatch: colorToMaterialColor(KpColorSeed.instance.primary),
+    primarySwatch:
+        ColorConverter<MaterialColor>().convert(KpColorSeed.instance.primary),
     fontFamily: GoogleFonts.prompt(fontStyle: FontStyle.normal).fontFamily,
     brightness: Brightness.light,
     appBarTheme: AppAppbar.appbar,
@@ -179,9 +180,8 @@ class MyThemes {
       titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
     ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: colorToMaterialColor(
-        Colors.blueGrey,
-      ), // Set the desired color for CircularProgressIndicator here
+      color: ColorConverter<MaterialColor>().convert(Colors
+          .blueGrey), // Set the desired color for CircularProgressIndicator here
     ),
   );
 }

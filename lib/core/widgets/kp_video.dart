@@ -94,7 +94,7 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    Theme.of(context);
     return flickManager != null
         ? FlickVideoPlayer(
             flickManager: flickManager!,
