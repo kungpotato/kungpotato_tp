@@ -24,7 +24,7 @@ class _KpTitleState extends State<KpTitle> {
       height: 60,
       decoration: (widget.hasBg ?? false)
           ? BoxDecoration(
-              color: theme.colorScheme.primary.withValues(alpha: 2),
+              color: theme.colorScheme.primary.withValues(alpha: 128),
             )
           : null,
       child: Padding(
