@@ -81,7 +81,7 @@ class _KpProductCardState extends State<KpProductCard> {
                           ),
                           gradient: LinearGradient(
                             colors: [
-                              Colors.black.withAlpha(128),
+                              Colors.black.withValues(alpha: 0.5),
                               Colors.transparent,
                             ],
                             begin: Alignment.bottomCenter,
@@ -97,7 +97,7 @@ class _KpProductCardState extends State<KpProductCard> {
                   child: Material(
                     color: Colors.transparent,
                     child: InkWell(
-                      splashColor: Colors.blue.withValues(alpha: 128),
+                      splashColor: Colors.blue.withValues(alpha: 0.2),
                       onTap: widget.onTap,
                       child: Padding(
                         padding: const EdgeInsets.all(12),
