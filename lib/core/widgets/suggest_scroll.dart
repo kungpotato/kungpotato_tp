@@ -73,7 +73,7 @@ class _SuggestShopScrollState extends State<KpSuggestScroll> {
   Widget cardItem(SuggestItem item) {
     final theme = Theme.of(context);
     return InkWell(
-      onTap: () {},
+      onTap: item.onTap,
       child: Padding(
         padding: const EdgeInsets.only(right: 35),
         child: SizedBox(
@@ -136,9 +136,11 @@ class SuggestItem {
     required this.title,
     required this.subtitle,
     required this.imageUrl,
+    this.onTap,
   });
 
   final String title;
   final String subtitle;
   final String imageUrl;
+  final void Function()? onTap;
 }
