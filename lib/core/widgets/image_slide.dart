@@ -29,7 +29,7 @@ class _KPImageSlideState extends State<KPImageSlide> {
   }
 
   void _startAutoSlide() {
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 7), () {
       if (pageController.hasClients) {
         int nextPage = (pageController.page?.toInt() ?? 0) + 1;
         if (nextPage >= (widget.images?.length ?? listBanners().length)) {
