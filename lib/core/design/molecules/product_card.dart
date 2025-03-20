@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kungpotato/core/design/atoms/atoms.dart';
 import 'package:kungpotato/core/widgets/kp_image.dart';
 
@@ -33,10 +34,8 @@ class _KpProductCardState extends State<KpProductCard> {
 
   @override
   void initState() {
-    setState(() {
-      favorite = widget.isFavorite;
-    });
     super.initState();
+    favorite = widget.isFavorite;
   }
 
   @override
@@ -46,7 +45,7 @@ class _KpProductCardState extends State<KpProductCard> {
       behavior: HitTestBehavior.translucent,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r), // ใช้ .r ให้ responsive
         ),
         clipBehavior: Clip.hardEdge,
         elevation: 2,
@@ -61,23 +60,23 @@ class _KpProductCardState extends State<KpProductCard> {
                   child: Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.r),
+                          topRight: Radius.circular(20.r),
                         ),
                         child: KpImage.network(
                           widget.imageUrl,
-                          height: 180,
+                          height: 180.h, // ใช้ .h ให้ responsive
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
                       ),
                       Container(
-                        height: 180,
+                        height: 180.h,
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.r),
+                            topRight: Radius.circular(20.r),
                           ),
                           gradient: LinearGradient(
                             colors: [
@@ -100,7 +99,7 @@ class _KpProductCardState extends State<KpProductCard> {
                       splashColor: Colors.blue.withValues(alpha: 0.2),
                       onTap: widget.onTap,
                       child: Padding(
-                        padding: const EdgeInsets.all(12),
+                        padding: EdgeInsets.all(12.w), // ใช้ .w ให้ responsive
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,8 +107,8 @@ class _KpProductCardState extends State<KpProductCard> {
                             // Product Title
                             Text(
                               widget.title,
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: 14.sp, // ใช้ .sp ให้ responsive
                                 fontWeight: FontWeight.bold,
                               ),
                               maxLines: 2,
@@ -125,18 +124,18 @@ class _KpProductCardState extends State<KpProductCard> {
                                       Text(
                                         '\$${widget.price!.toStringAsFixed(2)}',
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 16.sp, // ใช้ .sp
                                           color: Colors.green[700],
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
-                                      const SizedBox(width: 10),
+                                      SizedBox(width: 10.w), // ใช้ .w
                                       if (widget.oldPrice != null &&
                                           widget.oldPrice! > widget.price!)
                                         Text(
                                           '\$${widget.oldPrice!.toStringAsFixed(2)}',
                                           style: TextStyle(
-                                            fontSize: 14,
+                                            fontSize: 14.sp,
                                             color: Colors.red[700],
                                             decoration:
                                                 TextDecoration.lineThrough,
@@ -153,14 +152,14 @@ class _KpProductCardState extends State<KpProductCard> {
                                         children: [
                                           Icon(
                                             Icons.star,
-                                            size: 12,
+                                            size: 12.sp, // ใช้ .sp
                                             color: Colors.yellow[700],
                                           ),
-                                          const SizedBox(width: 4),
+                                          SizedBox(width: 4.w),
                                           Text(
                                             widget.rating.toString(),
-                                            style: const TextStyle(
-                                              fontSize: 12,
+                                            style: TextStyle(
+                                              fontSize: 12.sp,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -169,7 +168,7 @@ class _KpProductCardState extends State<KpProductCard> {
                                     KPText(
                                       'ขายแล้ว 20 ชิ้น',
                                       style: TextStyle(
-                                        fontSize: 10,
+                                        fontSize: 10.sp, // ใช้ .sp
                                         color: Colors.grey.shade700,
                                       ),
                                     ),
@@ -186,7 +185,6 @@ class _KpProductCardState extends State<KpProductCard> {
               ],
             ),
             // Discount Badge
-
             if ((widget.price != null) &&
                 widget.oldPrice != null &&
                 widget.oldPrice! > widget.price!)
@@ -194,19 +192,20 @@ class _KpProductCardState extends State<KpProductCard> {
                 top: 0,
                 left: 0,
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                  padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 2.h),
+                  // ใช้ .w และ .h
                   decoration: BoxDecoration(
                     color: Colors.red.shade700,
-                    borderRadius:
-                        const BorderRadius.only(topLeft: Radius.circular(20)),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                    ), // ใช้ .r
                   ),
                   child: KPText(
                     '-${((1 - widget.price! / widget.oldPrice!) * 100).toStringAsFixed(0)}%',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ),
@@ -218,7 +217,7 @@ class _KpProductCardState extends State<KpProductCard> {
               child: IconButton(
                 icon: Icon(
                   favorite ? Icons.favorite : Icons.favorite_border,
-                  size: 25,
+                  size: 25.sp, // ใช้ .sp ให้ responsive
                   color: Colors.white,
                 ),
                 onPressed: () {

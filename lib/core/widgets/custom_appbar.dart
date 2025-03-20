@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gradient_app_bar/flutter_gradient_app_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomClippedAppBar extends StatelessWidget
     implements PreferredSizeWidget {
@@ -35,5 +36,5 @@ class CustomClippedAppBar extends StatelessWidget
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(height!);
+  Size get preferredSize => Size.fromHeight(height?.h ?? kToolbarHeight.h);
 }

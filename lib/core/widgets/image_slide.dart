@@ -1,5 +1,6 @@
 import 'package:banner_carousel/banner_carousel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class KPImageSlide extends StatefulWidget {
   const KPImageSlide({this.images, super.key});
@@ -51,16 +52,18 @@ class _KPImageSlideState extends State<KPImageSlide> {
 
     return BannerCarousel(
       customizedBanners: widget.images ?? listBanners(),
-      height: 200,
+      height: 200.h,
+      // ใช้ .h ให้ responsive
       margin: EdgeInsets.zero,
       activeColor: theme.primaryColor,
       disableColor: Colors.grey,
-      spaceBetween: 20,
-      customizedIndicators: const IndicatorModel.animation(
-        width: 10,
-        height: 5,
-        spaceBetween: 2,
-        widthAnimation: 20,
+      spaceBetween: 20.w,
+      // ใช้ .w ให้ responsive
+      customizedIndicators: IndicatorModel.animation(
+        width: 10.w, // ใช้ .w
+        height: 5.h, // ใช้ .h
+        spaceBetween: 2.w, // ใช้ .w
+        widthAnimation: 20.w, // ใช้ .w
       ),
       pageController: pageController,
       indicatorBottom: false,

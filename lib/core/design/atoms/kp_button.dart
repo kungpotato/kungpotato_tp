@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_button_type.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
 
 class KPButton extends GFButton {
-  const KPButton({
+  KPButton({
     required super.onPressed,
     super.key,
     super.color,
@@ -17,6 +18,8 @@ class KPButton extends GFButton {
           blockButton: fullWidth,
           shape: GFButtonShape.pills,
           type: GFButtonType.solid,
+          textStyle: TextStyle(fontSize: 14.sp),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
         );
 
   factory KPButton.primary({

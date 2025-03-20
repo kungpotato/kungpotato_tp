@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:kungpotato/core/design/molecules/kp_appbar.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
@@ -54,13 +55,26 @@ class _KpLayoutState extends State<KpLayout>
         controller: tabController,
         children: widget.views.take(widget.tabs.length).toList(),
       ),
-      bottomNavigationBar: GFTabBar(
-        tabBarColor: KpColorSeed.instance.background,
-        labelColor: KpColorSeed.instance.primary,
-        unselectedLabelColor: Colors.grey,
-        length: widget.tabs.length,
-        controller: tabController,
-        tabs: widget.tabs,
+      bottomNavigationBar: Container(
+        height: 56.h, // Responsive tab bar height
+        color: KpColorSeed.instance.background,
+        child: GFTabBar(
+          tabBarColor: KpColorSeed.instance.background,
+          labelColor: KpColorSeed.instance.primary,
+          unselectedLabelColor: Colors.grey,
+          length: widget.tabs.length,
+          controller: tabController,
+          indicatorWeight: 3.h,
+          // Set indicator thickness
+          labelStyle: TextStyle(
+            fontSize: 14.sp, // Responsive text size
+            fontWeight: FontWeight.bold,
+          ),
+          unselectedLabelStyle: TextStyle(
+            fontSize: 12.sp, // Responsive unselected text size
+          ),
+          tabs: widget.tabs,
+        ),
       ),
     );
   }

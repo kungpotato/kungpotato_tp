@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:kungpotato/core/design/atoms/atoms.dart';
 import 'package:kungpotato/core/widgets/kp_image.dart';
@@ -38,10 +39,8 @@ class _KpProductCardState extends State<KpCourseCard> {
 
   @override
   void initState() {
-    setState(() {
-      favorite = widget.isFavorite;
-    });
     super.initState();
+    favorite = widget.isFavorite;
   }
 
   @override
@@ -51,7 +50,7 @@ class _KpProductCardState extends State<KpCourseCard> {
       behavior: HitTestBehavior.translucent,
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.r), // ใช้ .r ให้รองรับจอใหญ่
         ),
         clipBehavior: Clip.hardEdge,
         elevation: 2,
@@ -66,23 +65,23 @@ class _KpProductCardState extends State<KpCourseCard> {
                   child: Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20),
-                          topRight: Radius.circular(20),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20.r),
+                          topRight: Radius.circular(20.r),
                         ),
                         child: KpImage.network(
                           widget.imageUrl,
-                          height: 180,
+                          height: 180.h, // ปรับขนาดให้ responsive
                           width: double.infinity,
                           fit: BoxFit.cover,
                         ),
                       ),
                       Container(
-                        height: 180,
+                        height: 180.h, // ใช้ .h ให้ responsive
                         decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            topRight: Radius.circular(20),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20.r),
+                            topRight: Radius.circular(20.r),
                           ),
                           gradient: LinearGradient(
                             colors: [
@@ -105,7 +104,7 @@ class _KpProductCardState extends State<KpCourseCard> {
                       splashColor: Colors.blue.withValues(alpha: 0.2),
                       onTap: widget.onTap,
                       child: Padding(
-                        padding: const EdgeInsets.all(12),
+                        padding: EdgeInsets.all(12.w), // ใช้ .w ให้ responsive
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,14 +134,16 @@ class _KpProductCardState extends State<KpCourseCard> {
                                             children: [
                                               Icon(
                                                 FontAwesome.thumbs_up,
-                                                size: 12,
+                                                size: 12.sp,
+                                                // ใช้ .sp ให้ responsive
                                                 color: Colors.blue.shade700,
                                               ),
-                                              const SizedBox(width: 4),
+                                              SizedBox(width: 4.w),
+                                              // ปรับขนาด spacing
                                               Text(
                                                 widget.like!.toSuffixString(),
-                                                style: const TextStyle(
-                                                  fontSize: 12,
+                                                style: TextStyle(
+                                                  fontSize: 12.sp,
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
@@ -152,7 +153,8 @@ class _KpProductCardState extends State<KpCourseCard> {
                                           KPText(
                                             '${widget.learning!.toSuffixString()} คนกำลังเรียน ',
                                             style: TextStyle(
-                                              fontSize: 10,
+                                              fontSize: 10.sp,
+                                              // ใช้ .sp ให้ responsive
                                               color: Colors.grey.shade700,
                                             ),
                                           ),
@@ -177,18 +179,19 @@ class _KpProductCardState extends State<KpCourseCard> {
                 left: 0,
                 child: Container(
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
                   decoration: BoxDecoration(
                     color: Colors.red.shade700,
-                    borderRadius:
-                        const BorderRadius.only(topLeft: Radius.circular(20)),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.r),
+                    ),
                   ),
-                  child: const KPText(
+                  child: KPText(
                     'ใหม่',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 14.sp,
                     ),
                   ),
                 ),
@@ -200,7 +203,7 @@ class _KpProductCardState extends State<KpCourseCard> {
               child: IconButton(
                 icon: Icon(
                   favorite ? Icons.favorite : Icons.favorite_border,
-                  size: 25,
+                  size: 25.sp, // ใช้ .sp ให้ responsive
                   color: Colors.white,
                 ),
                 onPressed: () {

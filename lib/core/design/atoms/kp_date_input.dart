@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kungpotato/kungpotato.dart';
 import 'package:scroll_date_picker/scroll_date_picker.dart';
 
@@ -33,12 +34,12 @@ class KpDateInputField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 43,
+              height: 43.h, // ใช้ .h ให้ปรับตามขนาดจอ
               decoration: BoxDecoration(
                 border: Border(
                   left: BorderSide(
-                    color: theme.primaryColor, // Customize the border color
-                    width: 3, // Customize the border width
+                    color: theme.primaryColor, // สีของเส้นขอบ
+                    width: 3.w, // ปรับขนาดเส้นขอบ
                   ),
                 ),
               ),
@@ -51,12 +52,12 @@ class KpDateInputField extends StatelessWidget {
                 child: ReactiveTextField(
                   formControl: formControl,
                   validationMessages: validationMessages,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     enabled: false,
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 8,
+                      vertical: 10.h,
+                      horizontal: 8.w,
                     ),
                     filled: true,
                     fillColor: Colors.white,
@@ -73,23 +74,29 @@ class KpDateInputField extends StatelessWidget {
   void handleShowBottomSheet(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
-      shape: const RoundedRectangleBorder(
+      isScrollControlled: true,
+      // ให้รองรับการแสดงเต็มจอใน iPad
+      shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
-          top: Radius.circular(30),
+          top: Radius.circular(30.r), // ปรับขนาดขอบมุม
         ),
       ),
       clipBehavior: Clip.hardEdge,
       builder: (BuildContext context) {
-        return ScrollDatePicker(
-          selectedDate: DateTime.now(),
-          locale: locale ?? const Locale('th'),
-          onDateTimeChanged: (DateTime value) {
-            formControl?.value = value;
-          },
-          viewType: viewType,
-          maximumDate: maximumDate,
-          minimumDate:
-              minimumDate ?? DateTime.now().subtract(const Duration(days: 1)),
+        return Container(
+          height: 400.h, // ปรับขนาด Modal ตามหน้าจอ
+          padding: EdgeInsets.all(20.w),
+          child: ScrollDatePicker(
+            selectedDate: DateTime.now(),
+            locale: locale ?? const Locale('th'),
+            onDateTimeChanged: (DateTime value) {
+              formControl?.value = value;
+            },
+            viewType: viewType,
+            maximumDate: maximumDate,
+            minimumDate:
+                minimumDate ?? DateTime.now().subtract(const Duration(days: 1)),
+          ),
         );
       },
     );

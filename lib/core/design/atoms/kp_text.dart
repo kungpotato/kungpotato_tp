@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
 
 class KPText extends Text {
@@ -13,8 +14,8 @@ class KPText extends Text {
   factory KPText.text(String text) {
     return KPText(
       text,
-      style: const TextStyle(
-        fontSize: 16,
+      style: TextStyle(
+        fontSize: 16.sp, // ใช้ .sp เพื่อปรับขนาดตัวหนังสืออัตโนมัติ
       ),
     );
   }
@@ -22,84 +23,84 @@ class KPText extends Text {
   factory KPText.label1(String text) {
     return KPText(
       text,
-      style: TextStyle(fontSize: 16, color: Colors.grey.shade700),
+      style: TextStyle(fontSize: 16.sp, color: Colors.grey.shade700),
     );
   }
 
   factory KPText.label2(String text) {
     return KPText(
       text,
-      style: TextStyle(fontSize: 14, color: Colors.grey.shade700),
+      style: TextStyle(fontSize: 14.sp, color: Colors.grey.shade700),
     );
   }
 
   factory KPText.label3(String text) {
     return KPText(
       text,
-      style: TextStyle(fontSize: 12, color: Colors.grey.shade700),
+      style: TextStyle(fontSize: 12.sp, color: Colors.grey.shade700),
     );
   }
 
   factory KPText.label4(String text) {
     return KPText(
       text,
-      style: TextStyle(fontSize: 10, color: Colors.grey.shade700),
+      style: TextStyle(fontSize: 10.sp, color: Colors.grey.shade700),
     );
   }
 
   factory KPText.head1(String? text) {
     return KPText(
       text,
-      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
     );
   }
 
   factory KPText.head2(String? text) {
     return KPText(
       text,
-      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
     );
   }
 
   factory KPText.head3(String? text) {
     return KPText(
       text,
-      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
     );
   }
 
   factory KPText.head4(String? text) {
     return KPText(
       text,
-      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
     );
   }
 
   factory KPText.subtitle(String? text) {
     return KPText(
       text,
-      style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+      style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
     );
   }
 
   factory KPText.caption(String? text) {
     return KPText(
       text,
-      style: const TextStyle(fontSize: 10),
+      style: TextStyle(fontSize: 10.sp),
     );
   }
 
   factory KPText.error1(String? text) {
     return KPText(
       text,
-      style: TextStyle(fontSize: 12, color: KpColorSeed.instance.danger),
+      style: TextStyle(fontSize: 12.sp, color: KpColorSeed.instance.danger),
     );
   }
 
   factory KPText.error2(String? text) {
     return KPText(
       text,
-      style: TextStyle(fontSize: 10, color: KpColorSeed.instance.danger),
+      style: TextStyle(fontSize: 10.sp, color: KpColorSeed.instance.danger),
     );
   }
 

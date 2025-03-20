@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
 
 class KPOutlineButton extends GFButton {
-  const KPOutlineButton({
+  KPOutlineButton({
     required super.onPressed,
     super.key,
     super.color,
@@ -14,6 +15,8 @@ class KPOutlineButton extends GFButton {
           blockButton: fullWidth,
           shape: GFButtonShape.pills,
           type: GFButtonType.outline,
+          textStyle: TextStyle(fontSize: 14.sp),
+          padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 16.w),
         );
 
   factory KPOutlineButton.primary({

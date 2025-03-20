@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class KpImage extends StatelessWidget {
@@ -36,6 +37,7 @@ class KpImage extends StatelessWidget {
     this.height,
     super.key,
   }) : imageType = ImageType.svg;
+
   final String source;
   final ImageType imageType;
   final BoxFit? fit;
@@ -55,32 +57,38 @@ class KpImage extends StatelessWidget {
         return Image.asset(
           source,
           fit: fit,
-          width: width,
-          height: height,
+          width: width?.w, // ใช้ .w ให้ responsive
+          height: height?.h, // ใช้ .h ให้ responsive
           errorBuilder: (context, error, stackTrace) =>
-              const KpImage.base64('base64Mock'),
+              const KpImage.base64(base64Mock),
         );
       case ImageType.network:
         return Image.network(
           source,
           fit: fit,
-          width: width,
-          height: height,
+          width: width?.w,
+          // ใช้ .w
+          height: height?.h,
+          // ใช้ .h
           errorBuilder: (context, error, stackTrace) =>
               const KpImage.base64(base64Mock),
           loadingBuilder: (context, child, loadingProgress) {
             if (loadingProgress == null) {
               return child;
             }
-            return const CircularProgressIndicator.adaptive();
+            return SizedBox(
+              width: width?.w ?? 50.w, // ปรับขนาดการโหลด
+              height: height?.h ?? 50.h,
+              child: const Center(child: CircularProgressIndicator.adaptive()),
+            );
           },
         );
       case ImageType.svg:
         return SvgPicture.asset(
           source,
           fit: fit ?? BoxFit.contain,
-          width: width,
-          height: height,
+          width: width?.w, // ใช้ .w
+          height: height?.h, // ใช้ .h
           placeholderBuilder: (context) =>
               const CircularProgressIndicator.adaptive(),
         );
@@ -88,8 +96,8 @@ class KpImage extends StatelessWidget {
         return Image.memory(
           _decodeBase64Image(source),
           fit: fit,
-          width: width,
-          height: height,
+          width: width?.w, // ใช้ .w
+          height: height?.h, // ใช้ .h
         );
     }
   }

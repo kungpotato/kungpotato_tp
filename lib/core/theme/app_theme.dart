@@ -1,5 +1,6 @@
 import 'package:color_type_converter/color_type_converter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kungpotato/core/theme/app_appbar.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
@@ -11,9 +12,9 @@ final inputDecoration = InputDecorationTheme(
   focusColor: KpColorSeed.instance.primary,
   filled: true,
   isDense: true,
-  // contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
-  labelStyle: const TextStyle(color: Colors.black87, fontSize: 14),
-  hintStyle: const TextStyle(color: Colors.black87, fontSize: 14),
+  labelStyle: TextStyle(color: Colors.black87, fontSize: 14.sp),
+  // ใช้ .sp
+  hintStyle: TextStyle(color: Colors.black87, fontSize: 14.sp),
   fillColor: KpColorSeed.instance.background,
   focusedBorder: const UnderlineInputBorder(
     borderSide: BorderSide(color: Colors.grey),
@@ -40,9 +41,9 @@ class MyThemes {
       surface: KpColorSeed.instance.background,
       secondary: KpColorSeed.instance.secondary,
     ),
-    iconTheme: const IconThemeData(
+    iconTheme: IconThemeData(
       color: Colors.white,
-      size: 16,
+      size: 16.sp, // ใช้ .sp
     ),
     checkboxTheme: CheckboxThemeData(
       fillColor: WidgetStateProperty.all(KpColorSeed.instance.primary),
@@ -57,7 +58,7 @@ class MyThemes {
     buttonTheme: ButtonThemeData(
       buttonColor: KpColorSeed.instance.primary,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10.r), // ใช้ .r ให้ responsive
         side: BorderSide(color: KpColorSeed.instance.primary),
       ),
       textTheme: ButtonTextTheme.primary,
@@ -66,70 +67,72 @@ class MyThemes {
       style: ElevatedButton.styleFrom(
         backgroundColor: KpColorSeed.instance.primary,
         foregroundColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.r), // ใช้ .r
+        ),
         disabledBackgroundColor: Colors.grey,
         disabledForegroundColor: Colors.black,
       ),
     ),
     textTheme: TextTheme(
       titleMedium: TextStyle(
-        fontSize: 16,
+        fontSize: 16.sp,
         color: KpColorSeed.instance.front,
       ),
       titleLarge: TextStyle(
-        fontSize: 20,
+        fontSize: 20.sp,
         color: KpColorSeed.instance.front,
       ),
       titleSmall: TextStyle(
-        fontSize: 14,
+        fontSize: 14.sp,
         color: KpColorSeed.instance.front,
       ),
       bodySmall: TextStyle(
-        fontSize: 12,
+        fontSize: 12.sp,
         color: KpColorSeed.instance.front,
       ),
       bodyLarge: TextStyle(
-        fontSize: 18,
+        fontSize: 18.sp,
         color: KpColorSeed.instance.front,
       ),
       bodyMedium: TextStyle(
-        fontSize: 16,
+        fontSize: 16.sp,
         color: KpColorSeed.instance.front,
       ),
       displayLarge: TextStyle(
-        fontSize: 34,
+        fontSize: 34.sp,
         color: KpColorSeed.instance.front,
       ),
       displayMedium: TextStyle(
-        fontSize: 28,
+        fontSize: 28.sp,
         color: KpColorSeed.instance.front,
       ),
       displaySmall: TextStyle(
-        fontSize: 24,
+        fontSize: 24.sp,
         color: KpColorSeed.instance.front,
       ),
       headlineLarge: TextStyle(
-        fontSize: 22,
+        fontSize: 22.sp,
         color: KpColorSeed.instance.front,
       ),
       headlineMedium: TextStyle(
-        fontSize: 20,
+        fontSize: 20.sp,
         color: KpColorSeed.instance.front,
       ),
       headlineSmall: TextStyle(
-        fontSize: 18,
+        fontSize: 18.sp,
         color: KpColorSeed.instance.front,
       ),
       labelLarge: TextStyle(
-        fontSize: 16,
+        fontSize: 16.sp,
         color: KpColorSeed.instance.front,
       ),
       labelMedium: TextStyle(
-        fontSize: 14,
+        fontSize: 14.sp,
         color: KpColorSeed.instance.front,
       ),
       labelSmall: TextStyle(
-        fontSize: 12,
+        fontSize: 12.sp,
         color: KpColorSeed.instance.front,
       ),
     ),
@@ -154,8 +157,11 @@ class MyThemes {
     ),
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
-        textStyle:
-            const TextStyle(color: Colors.black87, fontWeight: FontWeight.bold),
+        textStyle: TextStyle(
+          color: Colors.black87,
+          fontWeight: FontWeight.bold,
+          fontSize: 14.sp,
+        ),
         foregroundColor: KpColorSeed.instance.primary,
       ),
     ),
@@ -163,7 +169,7 @@ class MyThemes {
         DropdownMenuThemeData(inputDecorationTheme: inputDecoration),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       backgroundColor: KpColorSeed.instance.primary,
-      extendedTextStyle: const TextStyle(color: Colors.white),
+      extendedTextStyle: TextStyle(color: Colors.white, fontSize: 14.sp),
       foregroundColor: Colors.white,
     ),
   );
@@ -173,15 +179,15 @@ class MyThemes {
     fontFamily: GoogleFonts.prompt(fontStyle: FontStyle.normal).fontFamily,
     brightness: Brightness.dark,
     appBarTheme: const AppBarTheme(
-      backgroundColor:
-          Colors.blueGrey, // Set AppBar background color for dark theme
+      backgroundColor: Colors.blueGrey,
     ),
-    textTheme: const TextTheme(
-      titleMedium: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+    textTheme: TextTheme(
+      titleMedium: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.bold),
     ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: ColorConverter<MaterialColor>().convert(Colors
-          .blueGrey), // Set the desired color for CircularProgressIndicator here
+      color: ColorConverter<MaterialColor>().convert(
+        Colors.blueGrey,
+      ),
     ),
   );
 }

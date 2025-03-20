@@ -1,5 +1,6 @@
 import 'package:flick_video_player/flick_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:video_player/video_player.dart';
 
@@ -105,12 +106,14 @@ class KpVideoPlayerState extends State<KpVideoPlayer> {
                   bufferedColor: const Color.fromRGBO(100, 100, 100, 0.5),
                   handleColor: const Color.fromRGBO(255, 215, 0, 1),
                   backgroundColor: const Color.fromRGBO(220, 220, 220, 1),
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
+                  padding: EdgeInsets.symmetric(
+                    vertical: 8.h, // ใช้ .h ให้ responsive
                   ),
-                  height: 5,
-                  handleRadius: 5,
-                  curveRadius: 5,
+                  height: 5.h,
+                  // ใช้ .h ให้ responsive
+                  handleRadius: 5.r,
+                  // ใช้ .r ให้ responsive
+                  curveRadius: 5.r, // ใช้ .r ให้ responsive
                 ),
               ),
             ),

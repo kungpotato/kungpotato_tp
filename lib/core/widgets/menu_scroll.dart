@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:kungpotato/core/theme/app_color.dart';
 import 'package:kungpotato/core/widgets/kp_image.dart';
 import 'package:scroll_indicator/scroll_indicator.dart';
@@ -17,7 +18,6 @@ class KpMenuScroll extends StatefulWidget {
   });
 
   final List<MenuItem> menuList;
-
   final List<MenuItem>? subMenuList;
   final bool isTwoLine;
   final Color? bgColor;
@@ -43,18 +43,18 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      height: widget.isTwoLine ? 180 : 80,
+      height: widget.isTwoLine ? 180.h : 80.h, // ใช้ .h ให้ responsive
       decoration: BoxDecoration(color: widget.bgColor),
       child: !widget.isSlide
           ? Wrap(
-              spacing: 2,
-              runSpacing: 15,
+              spacing: 2.w,
+              runSpacing: 15.h,
               children: widget.menuList
                   .asMap()
                   .entries
                   .map(
                     (e) => SizedBox(
-                      width: (MediaQuery.of(context).size.width - 50) / 5,
+                      width: (MediaQuery.of(context).size.width - 50.w) / 5,
                       child: itemWidget(e.key, e.value),
                     ),
                   )
@@ -69,8 +69,8 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
                     scrollDirection: Axis.horizontal,
                     child: Wrap(
                       direction: Axis.vertical,
-                      spacing: 15,
-                      runSpacing: 25,
+                      spacing: 15.h,
+                      runSpacing: 25.h,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       children: widget.subMenuList == null
                           ? widget.menuList
@@ -90,19 +90,19 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
                     ),
                   ),
                 ),
-                if (widget.indicator) const SizedBox(height: 5),
+                if (widget.indicator) SizedBox(height: 5.h),
                 if (widget.indicator)
                   ScrollIndicator(
                     scrollController: scrollController,
-                    width: 50,
-                    height: 5,
+                    width: 50.w,
+                    height: 5.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                       color: Colors.grey.shade300,
                     ),
                     indicatorDecoration: BoxDecoration(
                       color: theme.primaryColor,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(10.r),
                     ),
                   ),
               ],
@@ -124,8 +124,8 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
           Flexible(
             flex: 3,
             child: Container(
-              width: 50,
-              height: 50,
+              width: 50.w,
+              height: 50.h,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: KpColorSeed.instance.background,
@@ -134,20 +134,22 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
                 ),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.r),
                 child: KpImage.network(
                   item.img,
-                  width: 40,
+                  width: 40.w,
                 ),
               ),
             ),
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6.h),
           Flexible(
             child: Text(
               item.name,
-              style: theme.textTheme.bodySmall
-                  ?.copyWith(color: Colors.black87, fontSize: 10),
+              style: theme.textTheme.bodySmall?.copyWith(
+                color: Colors.black87,
+                fontSize: 10.sp, // ใช้ .sp ให้ responsive
+              ),
             ),
           ),
         ],
@@ -169,7 +171,7 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
                 border: Border(
                   bottom: BorderSide(
                     color: theme.colorScheme.primary,
-                    width: 2,
+                    width: 2.w,
                   ),
                 ),
               )
@@ -180,8 +182,8 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
             Flexible(
               flex: 3,
               child: Container(
-                width: 50,
-                height: 50,
+                width: 50.w,
+                height: 50.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: KpColorSeed.instance.background,
@@ -190,20 +192,22 @@ class _MenuScrollWidgetState extends State<KpMenuScroll> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(8.r),
                   child: KpImage.network(
                     item.img,
-                    width: 40,
+                    width: 40.w,
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 6),
+            SizedBox(height: 6.h),
             Flexible(
               child: Text(
                 item.name,
-                style:
-                    theme.textTheme.bodySmall?.copyWith(color: Colors.black87),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: Colors.black87,
+                  fontSize: 10.sp, // ใช้ .sp ให้ responsive
+                ),
               ),
             ),
           ],
